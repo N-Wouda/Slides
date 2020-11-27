@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>ECONOMETRICS, ARCHAEOLOGICAL 'BIG DATA' AND THE ROMAN ECONOMY</title>
+    <link rel="shortcut icon" href="./../favicon.ico"/>
+    <link rel="stylesheet" href="./../dist/reveal.css" />
+    <link rel="stylesheet" href="./../dist/theme/white.css" id="theme" />
+    <link rel="stylesheet" href="./../css/highlight/zenburn.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+# ECONOMETRICS, ARCHAEOLOGICAL 'BIG DATA' AND THE ROMAN ECONOMY
+
+Niels A. Wouda, Faculty of Economics and Business
+
+Willem M. Jongman, Department of History
+
+<br>
+
+27-08-2020
+</script></section><section  data-markdown><script type="text/template">
+# The Rome Hinterland Project
+
+- Tiber Valley project/South Etruria survey, _British School at Rome_
+- Suburbium survey, _Sapienza University of Rome_
+- Pontine Region project, _University of Groningen_
+
+![Project survey areas](images/rhp_areas.png)
+</script></section><section  data-markdown><script type="text/template">
+## Trends in population
+
+![Population trends](images/population_trends.png)
+</script></section><section  data-markdown><script type="text/template">
+## Trends in site numbers
+
+![Site number trends](images/site_number_trends.png)
+</script></section><section  data-markdown><script type="text/template">
+## Trends in dated amphorae
+
+![Dated amphorae](images/dated_amphorae.png)
+</script></section><section  data-markdown><script type="text/template">
+## Trends in provenance
+
+![Provenance](images/provenance.png)
+</script></section><section  data-markdown><script type="text/template">
+## Trends in market access
+
+![Provenance](images/market_access.png)
+</script></section><section  data-markdown><script type="text/template">
+# Conclusions
+
+### Methodological
+
+- Integrating multiple survey datasets is very worthwhile, and the more the 
+  better
+- High quality modern datasets are preferable
+
+
+### Historical
+- Major population growth from 300 BC until about AD 200, and decline thereafter
+- Per capita consumption was also significantly higher, and not just among the elite
+- Demand was first met locally, but increasingly from the wider Mediterranean 
+</script></section><section  data-markdown><script type="text/template">
+# The Rome Hinterland Project
+
+[http://comparativesurveyarchaeology.org/](http://comparativesurveyarchaeology.org/)
+
+| | |
+| --- | --- |
+| Peter Attema| Martijn van Leusen |
+| Remco Bronkhorst | Christopher Smith |
+| Maria Cristina Capanna | Gijs Tol |
+| Paolo Carafa | Rob Witcher |
+| Tymon de Haas | Niels Wouda |
+| Willem Jongman | |
+
+<br>
+
+<small>
+    We thank Maria Cristina Capanna, Tymon de Haas, and Gijs Tol for their feedback
+    on an earlier version of our analysis.
+</small>
+</script></section></div>
+    </div>
+
+    <script src="./../dist/reveal.js"></script>
+
+    <script src="./../plugin/markdown/markdown.js"></script>
+    <script src="./../plugin/highlight/highlight.js"></script>
+    <script src="./../plugin/zoom/zoom.js"></script>
+    <script src="./../plugin/notes/notes.js"></script>
+    <script src="./../plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":1920,"height":1080}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
