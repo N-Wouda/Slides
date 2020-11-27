@@ -17,7 +17,9 @@ rm favicon.ico
 
 # Deploy assets to gh-pages
 git add --all
+git stash
 git checkout gh-pages
+git checkout stash -- .
 git commit -m "[Assets] $1"
 
 # Return to src, remove assets
