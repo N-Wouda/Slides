@@ -15,5 +15,8 @@ to the presentation.
 
 # Deploying
 
-Made simple using the `deploy.sh` script in the repository root. Make sure to
-also pass a commit message!
+Made simple using the `prepare_deploy.sh` script in the repository root. Make
+sure to also pass a commit message!
+
+After preparing to deploy, the `src` and `gh-pages` branches still need to be
+pushed. That's up to you.

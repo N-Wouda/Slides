@@ -23,6 +23,3 @@ git commit -m "[Assets] $1"
 # Return to src, remove assets
 git checkout src
 git reset --hard
-
-# Deploy all changes
-git push --all
