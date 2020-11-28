@@ -10,18 +10,11 @@ git checkout src
 git add --all
 git commit -m "[Source] $1"
 
-# Build assets, move into repo root
-reveal-md slides/ --static _static
-mv _static/* .
-rm favicon.ico
+# Build assets, deploy to gh-pages
+reveal-md slides/ --static dist
 
-# Deploy assets to gh-pages
-git add --all
-git stash
-git checkout gh-pages
-git checkout stash -- .
-git commit -m "[Assets] $1"
+# I want a readme in the
+cp README.md dist/README.md
+rm dist/favicon.ico
 
-# Return to src, remove assets
-git checkout src
-git reset --hard
+ghp-import -n -m "[Assets] $1" dist

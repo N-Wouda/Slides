@@ -9,14 +9,13 @@ using
 ```
 reveal-md <path to .md file> -w
 ``` 
-from the project root. All presentations are under `slides/`, each in their own
-directory. This particular command watches the file, and opens the web browser
-to the presentation.
+from the project root **in the `src` branch**. All presentations are under 
+`slides/`, each in their own directory. This particular command watches the 
+file, and opens the web browser to the presentation that updates as the markdown
+file is updated.
 
 # Deploying
 
-Made simple using the `prepare_deploy.sh` script in the repository root. Make
-sure to also pass a commit message!
-
-After preparing to deploy, the `src` and `gh-pages` branches still need to be
-pushed. That's up to you.
+Made simple using the `prepare_deploy.sh` script in the repository root. After
+preparing to deploy, the `src` and `gh-pages` branches still need to be pushed.
+That's up to you - I'm not a fan of autocommit modes.
