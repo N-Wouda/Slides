@@ -12,9 +12,6 @@ git commit -m "[Source] $1"
 
 # Build assets, deploy to gh-pages
 reveal-md slides/ --static dist
-
-# I want a readme in the
 cp README.md dist/README.md
 rm dist/favicon.ico
-
 ghp-import -n -m "[Assets] $1" dist
