@@ -25,11 +25,15 @@ Willem M. Jongman, Department of History
 
 ---
 
+# Population
+
+----
+
 ## Trends in population
 
 ![Population trends](images/population_trends.png)
 
----
+----
 
 ## Trends in site numbers
 
@@ -37,17 +41,21 @@ Willem M. Jongman, Department of History
 
 ---
 
+# Market integration
+
+----
+
 ## Trends in dated amphorae
 
 ![Dated amphorae](images/dated_amphorae.png)
 
----
+----
 
 ## Trends in provenance
 
 ![Provenance](images/provenance.png)
 
----
+----
 
 ## Trends in market access
 
