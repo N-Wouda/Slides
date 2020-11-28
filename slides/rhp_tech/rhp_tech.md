@@ -1,6 +1,5 @@
 ---
 title: RHP Technical meeting
-theme: white 
 ---
 
 # RHP Technical meeting

@@ -1,6 +1,5 @@
 ---
 title: RHP User meeting
-theme: white 
 ---
 
 # RHP User meeting

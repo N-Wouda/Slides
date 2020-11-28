@@ -1,4 +1,6 @@
 {
+    "theme": "white",
+    "highlightTheme": "github",
     "scripts": [
         "plugin/chalkboard/plugin.js",
         "plugin/menu/menu.js",
