@@ -19,7 +19,7 @@ reveal-md slides/ --static dist
 for f in dist/*/*.html; do
   # Based on https://stackoverflow.com/a/1322126/4316405
   dn=$(dirname $f)
-  mv "$f" "$dn/index.html"
+  mv -f "$f" "$dn/index.html"
 done
 
 cp README.md dist/README.md
