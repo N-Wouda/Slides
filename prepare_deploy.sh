@@ -11,6 +11,7 @@ git add --all
 git commit -m "[Source] $1"
 
 # Build assets
+rm -rf dist
 reveal-md slides/ --static dist
 
 # I use a nested structure for my presentations, with each presentation in
