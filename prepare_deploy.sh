@@ -23,6 +23,7 @@ for f in dist/*/*.html; do
 done
 
 cp README.md dist/README.md
+cp -a plugin/ dist/_assets/
 rm dist/favicon.ico
 rm dist/index.html
 
