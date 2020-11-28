@@ -133,9 +133,12 @@ Willem M. Jongman, Department of History
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"width":1920,"height":1080,"transition":"slide"}, queryOptions);
+      var options = extend(defaultOptions, {"width":1920,"height":1080,"transition":"slide","slideNumber":"c","chalkboard":{"grid":false,"theme":"whiteboard","toggleChalkboardButton":false,"toggleNotesButton":false},"menu":{"numbers":"c","markers":false,"hideMissingTitles":true}}, queryOptions);
     </script>
 
+    <script src="./../_assets/plugin/chalkboard/plugin.js"></script>
+    <script src="./../_assets/plugin/menu/menu.js"></script>
+    <script src="./../_assets/plugin/plugin.js"></script>
 
     <script>
       Reveal.initialize(options);
