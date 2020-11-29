@@ -70,7 +70,7 @@ class CreateTypeColumnArtefactForms(Migration):
 
 With some inline $\LaTeX$, like $x = 3$, or display math, like
 
-$$f(y) = \int_0^\infty y dy$$
+$$f(y) = \int_0^\infty y~dy$$
 
 or
 
