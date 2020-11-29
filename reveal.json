@@ -13,5 +13,13 @@
         "numbers": "c",
         "markers": false,
         "hideMissingTitles": true
+    },
+    "math": {
+        "Tex": {
+            "jax": [
+                "input/TeX",
+                "output/SVG"
+            ]
+        }
     }
 }
