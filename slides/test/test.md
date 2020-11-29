@@ -4,35 +4,43 @@ title: Test slides
 
 # Test slides
 
-Niels Wouda
-
 <br>
+
+Niels Wouda
 
 28-11-2020
 
 ---
 
-# First slidedeck
+# First section
 
-Some text, with `code` and _emphasis_ and **strong**.
+Some styling:
+
+`inline code`
+
+_emphasis_
+
+**strong**
+
+~~crossed out~~
+
+<ins>underlined</ins> ([with an HTML tag](https://stackoverflow.com/a/47354053/4316405)).
 
 ----
 
-## A vertical slide
-
+## Some lists
+ 
 - Bullet 1
 - Bullet 2
 
-----
-
-## Vertical 2
+and
 
 1. Item 1
 2. Item 2
 
 ----
 
-## Vertical 3
+## Code
 
 (from the RHP code)
 
@@ -56,6 +64,34 @@ class CreateTypeColumnArtefactForms(Migration):
 
 # A new section
 
-With some inline $\LaTeX$, like $x = 3$, or
+----
+
+# Some math
+
+With some inline $\LaTeX$, like $x = 3$, or display math, like
 
 $$f(y) = \int_0^\infty y dy$$
+
+or
+
+$$\sum_{k = 1}^n k = \frac{n(n + 1)}{2} $$
+----
+
+# An image
+
+(from the EAA RHP presentation)
+
+![Population trends](images/population_trends.png)
+
+----
+
+# A table
+
+| Header 1 | Header 2 |
+| --- | --- |
+| Value 1 | Value 2 |
+| Value 3 | Value 4 |
+
+---
+
+# The end

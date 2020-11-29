@@ -4,11 +4,11 @@ title: ECONOMETRICS, ARCHAEOLOGICAL 'BIG DATA' AND THE ROMAN ECONOMY
 
 # ECONOMETRICS, ARCHAEOLOGICAL 'BIG DATA' AND THE ROMAN ECONOMY
 
+<br>
+
 Niels A. Wouda, Faculty of Economics and Business
 
 Willem M. Jongman, Department of History
-
-<br>
 
 27-08-2020
 
