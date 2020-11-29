@@ -17,19 +17,22 @@ Niels Wouda
 Note:
 
 This window contains the speaker notes, per slide (some slides do not have notes).
-Keep the window open to read along!
+Keep it open to read along!
 
 ---
 
 # This meeting
 
-We are going to discuss:
-
-- The database (RHPdb)
+- The RHP database (RHPdb)
 
 - How we got there
 
 - Extending the database
+
+Note:
+
+This is going to take a while. I suggest we have breaks every hour or so, but
+leave that up to you.
 
 ---
 
@@ -57,7 +60,7 @@ Of course, the mapping process is still very laborious.
 
 ## Schema
 
-This is the lay-out of the RHP database.
+This is the lay-out of the RHPdb.
 
 ![Schema](images/schema.png)
 
@@ -82,7 +85,7 @@ TODO
 
 ## Activities
 
-(not in the prototype)
+(not fully implemented)
 
 Note:
 
@@ -92,19 +95,9 @@ needs quite a bit of work.
 
 That work will not be done for the prototype.
 
-----
-
-## An aside: migrations
-
-TODO
-
 ---
 
 # How we got here
-
-----
-
-## A bit of process
 
 - Pumping data from the project-specific databases to the RHPdb requires 
 _mappings_ (data), which are used by _mappers_ (code). Making mappings requires 
@@ -125,7 +118,12 @@ quite a bit of discussion.
 
 Note:
 
-These mappings and mappers will be discussed shortly. Make sure you understand
+How is the database schema then populated? How did we agree on what things mean,
+so that we could place them in an _integrated_ database?
+
+That's what this section is about.
+
+The mappings and mappers will be discussed shortly. Make sure you understand
 the difference between a _mapping_ (data) and a _mapper_ (code). The first is
 purely a table, the latter is a thing that does something.
 
@@ -135,16 +133,32 @@ mapping. This first proposal immediately highlights things that are not yet
 sufficiently clear, and need project-specific input. That's then incorporated 
 via an iterative process, until everyone agrees.
 
-GitHub also hosts all the code.
+Compare that to [this timeless wisdom](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html):
+
+>It’s a lot simpler to have a discussion based on something written down. It’s 
+>easy to talk endlessly and in circles about a problem if nothing is ever put to
+>text. The simple act of writing down a proposed solution means everyone has a
+>concrete idea that can be argued about and iterated upon.
 
 ---
 
 # Mappings
 
-> A _mapping_ is a function that takes a **project-specific input** and transforms
-> it into a **standardised output**, ready for ingestion into the RHPdb. 
+> A _mapping_  takes a **project-specific input** and transforms it into a
+> **standardised output**, ready for ingestion into the RHPdb. 
 
-You write these mappings!
+- A mapping is often formulated as a table, with at least an _in_ and _out_ 
+  column (and possibly others).
+
+- The process for writing these is often something like this:
+  1. I post a list of all values found in the project-specific databases for some
+     entity (e.g., all black glazed types used by each project) in the appropriate
+     GitHub issue. These form the _in_ (input) column.
+  2. You (an archaeologist) determine an appropriate RHP typology, and map the _in_
+     values to a new _out_ value taken from that typology. This is the _out_ column.
+  3. Once completed, I take the mapping and restructure it a little so the code can
+     ingest it. The code first writes the RHP typology to the database, and then 
+     uses the mapping to integrate the project-specific data.
 
 Note:
 
@@ -152,23 +166,34 @@ I'm pointing this out explicitly because I want to hammer down that we are takin
 _inputs_ from the project databases, map them in some fashion, and write the 
 _output_ into the RHPdb. This is crucial to understand the code base.
 
-These mappings are written to cover all cases found in the input data. How to cover
-these takes an archaeologist - I'm here to point out cases that have been missed,
-and implement them once the mapping is completed.
+The difference between a mapping and a new typology is also important. The new
+types are defined first, and then a mapping is written. We focus on the mapping
+here, not the new types (that's for the user session).
+
+Examples follow in a little bit!
 
 ----
 
-## Mapping when original records are kept
+## Mapping types
 
-- Mappings are used:
-  - To translate non-English terminology
-  - To fix common spelling errors
+- In some cases we impose RHP type hierarchies ('classes' and 'super classes') on
+  top of project-specific data, but also keep the original typology.
 
-- These standardised values are then referenced in the RHP site interpretation and
-  periodisation hierarchies.
-- New records are also created, belonging to the RHP project. 
+- In other cases we fully integrate the project-specific data using new RHP
+typologies. Original typologies are not kept.
 
-(This is how we mapped over the site interpretations)
+----
+
+## Mapping when original types are kept
+
+- Exclusively used for site interpretations (and periodisations).
+- Mapping is used to:
+  - Translate non-English terminology,
+  - Fix common spelling errors,
+  - Insert important meta-data (_e.g._ definitions) not found in the 
+    project-specific database.
+- These mapped (project-specific) values are then placed into a RHP type hierarchy.
+- New records are also inserted, using RHP typologies.
 
 Note:
 
@@ -176,17 +201,19 @@ This is not a 'true' mapping, in the sense that we do not really dispense with
 the old. Nonetheless, half the database consists of these types of records, and
 it is important to understand there are two types of mappings in play.
 
+We will see an example of this shortly. 
+
 Because we keep the original data insofar possible and also have the new RHP
 records, queries require some nuance to avoid duplicate counting. We will discuss
 that in the user meeting.
 
 ----
 
-## Mapping when original records are not kept
+## Mapping when original types are not kept
 
-- Mappings are used:
-  - To create _concordance lists_, placing old values next to the new one.
-  - As a true function, taking the old value and mapping it to the new one.
+- This is far simpler.
+
+- Mapping takes a project-specific value and transforms it to the appropriate RHP term.
 
 (We did this with finds artefacts, and in general with all well-understood typologies)
 
@@ -195,6 +222,9 @@ Note:
 This is conceptually the easiest type of mapping, because no old values are kept
 at all. Instead, we introduce our own terms for everything and match each 
 project-specific terminology to our terms.
+
+We map to our new RHP types, so these mappings are very simple. All meta-data
+is with the new type lists, and not present in the project-specific mappings.
  
 This is **much preferred** over keeping the original records, but cannot always
 be done.
@@ -205,25 +235,94 @@ be done.
 
 ----
 
-## Site interpretations
+## Sites
 
-TODO
+- RHPdb has a unified hierarchy _on top of_ project-specific interpretations.
+
+- Project-specific interpretations are thus also in the RHPdb.
+
+- Example (TVP site interpretations):
+
+| in                                         | out            | rhp           |
+|--------------------------------------------|----------------|---------------|
+| Funerary:   catacomb                       | Catacomb       | Catacomb      |
+| Funerary:   cemetery / necropolis          | Necropolis     | Burial ground |
+| Funerary:   columbarium                    | Columbarium    | Columbarium   |
+| Funerary:   mausoleum                      | Mausoleum      | Mausoleum     |
+| Funerary:   tomb - tumulus                 | Tomb - tumulus | Tomb          |
+| ... | ... | ... |
+
+Note:
+
+Here we see that the functional classification of the TPV types ('Funerary:')
+is subsumed by the hierarchical structure of the RHP's site types. Indeed,
+these types are all under the 'Funeral' parent.
+
+Besides the newly named, project-specific types in the _out_ column, we also
+add records with this interpretation as an RHP record with the type indicated
+by the _rhp_ column. That leads to a bit of 'duplication' (depending on your 
+perspective), but much more effective querying.
+
+Out names are always close to the _in_ name - _rhp_ names not necessarily!
+
+We only add something on top of project-specific data. This means you can query
+both by the project-specific interpretations (if you know them), or use our
+hierarchy to get the right results.
+
+This example only discusses the interpretations, but the same holds for
+periodisations.
 
 ----
 
-## Black glazed typology
+## Black glazed artefacts
 
-TODO
+- RHPdb has its own typology.
+
+- Project-specific artefacts with project-specific types are mapped over using
+  appropriate RHPdb types. Original types are not kept.
+
+- Example (PRP black glazed typology):
+
+| in                     | out           |
+|------------------------|---------------|
+| Morel form 1110-20     | Morel 1110-20 |
+| Morel form 1111        | Morel 1111    |
+| Morel form 1113(b1)    | Morel 1113    |
+| Morel form 1440 series | Morel 1440    |
+| Morel form 1443(l1)    | Morel 1443    |
+| ... | ... |
+
+Note:
+
+This means the project-specific interpretations are **not** available in the 
+RHPdb.
+
+These sorts of mappings (where the old types are not kept) are very simple, and
+always have at least an _in_ and _out_ column.
 
 ---
 
-# From data to code
+# Populating the database
 
-So now we have some mappings in Excel files.. what's next?
+So now we have some mappings in (Excel) data files.. what's next?
+
+Note:
+
+This is to a large extent why this is the _technical_ meeting. 
 
 ----
 
-## Code
+## Mappers
+
+- Implemented in Python.
+
+- Each project has its own mappers.
+
+- Each mapper is responsible for populating one table of the RHP database.
+
+TODO
+
+Note:
 
 TODO
 
@@ -231,4 +330,116 @@ TODO
 
 # Extending the database
 
-TODO
+----
+
+## Updating the schema
+
+- Python and the [orator](https://orator-orm.com/) package.
+
+- You already know the concept of a _schema_. Here we introduce a
+  _schema builder_.
+
+- The schema is built incrementally via _migrations_.
+
+Note:
+
+This hopefully answers TdH's question how to edit/add to the database structure.
+
+I use Python and the [orator](https://orator-orm.com/) package for this. From 
+Orator, in particular its [migrations](https://orator-orm.com/docs/0.9/migrations.html) 
+and [schema builder](https://orator-orm.com/docs/0.9/schema_builder.html) functionality
+is used.
+
+For migrations: remember that strange table? It's tied to this!
+
+----
+
+## Migrations
+
+- Suppose we want to add the `actors` table to the RHPdb. The table includes at
+least a unique ID `id_actor` and an actor `name`. 
+
+- This is how such a `CreateActors` migration is written using `orator`:
+
+```python
+from orator.migrations import Migration
+
+
+class CreateActors(Migration):
+
+    def up(self):
+        with self.schema.create('actors') as table:
+            table.increments('id_actor')
+            table.string('name', 64)
+
+    def down(self):
+        self.schema.drop_if_exists('actors')
+```
+
+- Many other examples in the `migrations` directory of the RHP codebase 
+([on GitHub](https://github.com/N-Wouda/RHP/tree/master/migrations)). There is
+a README there as well. Together, these migrations incrementally construct the
+database schema.
+
+Note:
+
+# What's happening here? 
+
+A `Migration` has two methods, `up` and `down`. We will also see this for the
+database mappers, later on. `up()` applies these changes to the database, 
+`down()` removes the changes - if they exist. The current state of the database
+is tracked in the `migrations` table in the RHPdb.
+
+That defines the structure of a migration. Now the contents of these methods.
+
+Each method uses Orator's _schema builder_ to update the schema. 
+
+In the `up()` method, the 'actors' table is created. We also specify the columns
+we want on that table, in this case a unique, incrementing ID called 'id_actor',
+and a fixed-size character field called 'name'.
+
+The `down()` method drops the 'actors' table from the database, if the table
+exists (and does nothing otherwise). This is useful when implementing the mappers
+in code, as that often takes many tries. The RHPdb is built using a completely
+reversible process - clearing the database and re-inserting the data can be done
+in less than a minute.
+
+# What if you want to add more attributes later?
+ 
+Simple, write another migration! See the files in the `migrations` directory on
+GitHub. The whole process on how to run these migrations (with orator) is also
+explained there.
+
+----
+
+## Populating the new table
+
+- After adding a new column or table to the schema, the usual process of writing
+  mappings and  mappers applies:
+  - Determine how to map over data, and, if appropriate, formulate a mapping.
+  - Implement a new `Mapper` in the project directory (and add it to the `MAPPER` list),
+    or update the appropriate existing mapper.
+  - Import your changes into the database. This will probably require a few 
+    iterations to get your changes exactly right.
+
+- This is precisely what we explained when we discussed the `Mapper` class!
+
+Note:
+
+Of course this is non-trivial. But the point is that there are a lot of examples
+(the entire codebase), and adding new data should not be approached any differently.
+
+---
+
+# Questions?
+
+---
+
+# That's all, folks!
+
+- These slides are all online, so you can (re-)read them later.
+ 
+- To facilitate re-use, there are a lot of speaker notes in the presentation.
+
+- Anything unclear? Mail me at [nielswouda@gmail.com](mailto:nielswouda@gmail.com). 
+ 

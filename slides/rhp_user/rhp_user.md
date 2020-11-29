@@ -10,7 +10,57 @@ Niels Wouda
 
 06-01-2021
 
+<br>
+
+<small>Speaker notes can be accessed via the `s` button</small>
+
+Note:
+
+This window contains the speaker notes, per slide (some slides do not have notes).
+Keep it open to read along!
+
 ---
 
-# TODO
+
+# This meeting
+
+- The RHPdb (briefly)
+
+- Example queries
+
+---
+
+# The RHPdb
+
+The [technical slides](https://nielswouda.com/slides/rhp_tech/) have an in-depth discussion
+of the database schema.
+
+Here we discuss the database content, rather than its structure.
+
+---
+
+## TODO
+
+---
+
+# Example queries
+
+(finally!)
+
+----
+
+## TODO
+
+---
+
+# Questions?
+
+---
+
+# That's all, folks!
+
+- These slides are all online, so you can (re-)read them later.
  
+- To facilitate re-use, there are a lot of (speaker) notes in the presentation.
+
+- Anything unclear? Mail me at [nielswouda@gmail.com](mailto:nielswouda@gmail.com). 
