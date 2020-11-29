@@ -22,9 +22,170 @@
 Niels Wouda
 
 04-01-2021
-</script></section><section  data-markdown><script type="text/template">
-# TODO
- </script></section></div>
+
+<br>
+
+<small>Speaker notes can be accessed via the `s` button</small>
+
+<aside class="notes"><p>This window contains the speaker notes, per slide (some slides do not have notes).
+Keep the window open to read along!</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+# This meeting
+
+We are going to discuss:
+
+- The database (RHPdb)
+
+- How we got there
+
+- Extending the database
+</script></section><section ><section data-markdown><script type="text/template">
+# The database
+
+- Tech: PostgreSQL, with PostGIS extension for geodata
+- Contains (most of) the TVP, Suburbium, and PRP data
+- New projects should not require changes to the database structure
+
+<aside class="notes"><p>The tech stack is a simple SQL database, not unlike Access. PostGIS adds support
+for querying and storing geodata. That can be used directly (not recommended),
+or through another tool like gis.</p>
+<p>Most data have been mapped over, in particular location data, site
+interpretations, and many diagnostics and other finds. Activities and survey
+methodologies/conditions have not been mapped over in this pilot.</p>
+<p>The database <em>structure</em> does not directly depend on project-specific ideas, so
+new projects can be inserted without having to change existing structures/data.
+Of course, the mapping process is still very laborious.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Schema
+
+This is the lay-out of the RHP database.
+
+![Schema](images/schema.png)
+
+<aside class="notes"><p>We will discuss this in detail in the next few slides, zooming in on each part
+of the database.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Locations
+
+TODO
+</script></section><section data-markdown><script type="text/template">
+## Finds
+
+TODO
+</script></section><section data-markdown><script type="text/template">
+## Activities
+
+(not in the prototype)
+
+<aside class="notes"><p>As already alluded to, this part of the database is only partially implemented.
+Parts of it exist, parts do not - it is not really ready for querying, and still
+needs quite a bit of work.</p>
+<p>That work will not be done for the prototype.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## An aside: migrations
+
+TODO
+</script></section></section><section ><section data-markdown><script type="text/template">
+# How we got here
+</script></section><section data-markdown><script type="text/template">
+## A bit of process
+
+- Pumping data from the project-specific databases to the RHPdb requires 
+_mappings_ (data), which are used by _mappers_ (code). Making mappings requires 
+quite a bit of discussion.
+  - We found early on that it is best to start from a concrete proposal prepared 
+    by one person, which is then reviewed by all. This results in focused 
+    discussion, and quicker agreement.
+
+- GitHub works really well for us:
+
+  - Has an issue tracker where discussion can take place.
+  
+  - Stores everything so no history is hidden in (individual) mailboxes.
+  
+  - Has a wiki system we use for manuals and documentation.
+
+  - Uses _git_ to store the code/mappers, so everything's in one place!
+
+<aside class="notes"><p>These mappings and mappers will be discussed shortly. Make sure you understand
+the difference between a <em>mapping</em> (data) and a <em>mapper</em> (code). The first is
+purely a table, the latter is a thing that does something.</p>
+<p>Concrete proposals are possible because we already understand each others data
+somewhat. Most of it is fairly similar, so it is not too hard to draw up a first
+mapping. This first proposal immediately highlights things that are not yet 
+sufficiently clear, and need project-specific input. That&#39;s then incorporated 
+via an iterative process, until everyone agrees.</p>
+<p>GitHub also hosts all the code.</p>
+</aside></script></section></section><section ><section data-markdown><script type="text/template">
+# Mappings
+
+> A _mapping_ is a function that takes a **project-specific input** and transforms
+> it into a **standardised output**, ready for ingestion into the RHPdb. 
+
+You write these mappings!
+
+<aside class="notes"><p>I&#39;m pointing this out explicitly because I want to hammer down that we are taking
+<em>inputs</em> from the project databases, map them in some fashion, and write the 
+<em>output</em> into the RHPdb. This is crucial to understand the code base.</p>
+<p>These mappings are written to cover all cases found in the input data. How to cover
+these takes an archaeologist - I&#39;m here to point out cases that have been missed,
+and implement them once the mapping is completed.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Mapping when original records are kept
+
+- Mappings are used:
+  - To translate non-English terminology
+  - To fix common spelling errors
+
+- These standardised values are then referenced in the RHP site interpretation and
+  periodisation hierarchies.
+- New records are also created, belonging to the RHP project. 
+
+(This is how we mapped over the site interpretations)
+
+<aside class="notes"><p>This is not a &#39;true&#39; mapping, in the sense that we do not really dispense with
+the old. Nonetheless, half the database consists of these types of records, and
+it is important to understand there are two types of mappings in play.</p>
+<p>Because we keep the original data insofar possible and also have the new RHP
+records, queries require some nuance to avoid duplicate counting. We will discuss
+that in the user meeting.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Mapping when original records are not kept
+
+- Mappings are used:
+  - To create _concordance lists_, placing old values next to the new one.
+  - As a true function, taking the old value and mapping it to the new one.
+
+(We did this with finds artefacts, and in general with all well-understood typologies)
+
+<aside class="notes"><p>This is conceptually the easiest type of mapping, because no old values are kept
+at all. Instead, we introduce our own terms for everything and match each 
+project-specific terminology to our terms.</p>
+<p>This is <strong>much preferred</strong> over keeping the original records, but cannot always
+be done.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Some examples
+</script></section><section data-markdown><script type="text/template">
+## Site interpretations
+
+TODO
+</script></section><section data-markdown><script type="text/template">
+## Black glazed typology
+
+TODO
+</script></section></section><section ><section data-markdown><script type="text/template">
+# From data to code
+
+So now we have some mappings in Excel files.. what's next?
+</script></section><section data-markdown><script type="text/template">
+## Code
+
+TODO
+</script></section></section><section  data-markdown><script type="text/template">
+# Extending the database
+
+TODO
+</script></section></div>
     </div>
 
     <script src="./../dist/reveal.js"></script>
@@ -67,7 +228,7 @@ Niels Wouda
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"width":1920,"height":1080,"transition":"slide","slideNumber":"c","chalkboard":{"grid":false,"theme":"whiteboard","toggleChalkboardButton":false,"toggleNotesButton":false},"menu":{"numbers":"c","markers":false,"hideMissingTitles":true},"math":{"Tex":{"jax":["input/TeX","output/SVG"]}}}, queryOptions);
+      var options = extend(defaultOptions, {"width":1600,"height":1050,"transition":"slide","slideNumber":"c","chalkboard":{"grid":false,"theme":"whiteboard","toggleChalkboardButton":false,"toggleNotesButton":false},"menu":{"numbers":"c","markers":false,"hideMissingTitles":true},"math":{"Tex":{"jax":["input/TeX","output/SVG"]}}}, queryOptions);
     </script>
 
     <script src="./../_assets/plugin/chalkboard/plugin.js"></script>
