@@ -24,22 +24,15 @@ Keep it open to read along!
 
 # This meeting
 
-- The RHPdb (briefly)
+- The [technical slides](https://nielswouda.com/slides/rhp_tech/) discuss the
+database schema. Should we recap?
 
 - Example queries
 
----
+Note:
 
-# The RHPdb
-
-The [technical slides](https://nielswouda.com/slides/rhp_tech/) have an in-depth discussion
-of the database schema.
-
-Here we discuss the database content, rather than its structure.
-
----
-
-## TODO
+The technical session was two days ago, so I think I can skip this. If not, 
+start from the technical slides.
 
 ---
 
