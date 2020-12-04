@@ -12,12 +12,17 @@ Niels Wouda
 
 <br>
 
-<small>Speaker notes can be accessed via the `s` button</small>
+<small>Speaker notes can be accessed via the `s` key</small>
 
 Note:
 
 This window contains the speaker notes, per slide (some slides do not have notes).
 Keep it open to read along!
+
+This presentation serves as a complete - albeit high-level - introduction to the
+construction of the RHP database. As such, it has two audiences: _archaeologists_
+(you) and a future _developer_. I attempt to document both roles in this process.
+Most of the presentation is kept rather simple, but some jargon is inevitable.  
 
 ---
 
@@ -38,7 +43,7 @@ leave that up to you.
 
 # The database
 
-- Tech: PostgreSQL, with PostGIS extension for geodata
+- PostgreSQL, with PostGIS extension for geodata
 - Contains (most of) the TVP, Suburbium, and PRP data
 - New projects should not require changes to the database structure
 
@@ -71,7 +76,106 @@ of the database.
 
 ----
 
+## Projects
+
+- Referenced (almost) everywhere.
+- Documents the specific project a record came from.
+- Currently contains:
+
+| id_project | name | abbreviation |
+|---|-------------------------|-----|
+| 1 | Rome Hinterland Project | rhp |
+| 2 | Pontine Region Project  | prp |
+| 3 | Rome Suburbium Project  | rsp |
+| 4 | Tiber Valley Project    | tvp |
+
+Note:
+
+# Why is the RHP in here?
+
+The RHP introduces some (location) interpretations and periodisations that are
+not related to the original projects, so we needed a way to track those. Making 
+the RHP into a project was the easiest way to achieve this.
+
+Plus: the RHP is not special. Our new typologies and interpretations and the like
+are not that different from the project-specific efforts. 
+
+----
+
 ## Locations
+
+- Various types of locations (`location_types` table). 
+  - Currently: `site`, `subsite`, and `unit`.
+- Locations are hierarchical (`location_hierarchy` table).
+  - Subsites have a site parent.
+  - (Some) units have a site parent.
+- Sites and subsites often have an interpretative aspect, units do not.
+  - Interpretation is stored in the `location_interpretations` table, as one 
+    record per (interpretation, period)-pair.
+- Geodata (`point` and/or `polygon` fields).
+- Example records (shortened, one from each project):
+
+| id_location | id_origin | id_project | point | polygon | id_location_type |
+| --- | --- | --- | --- | --- | --- |
+| 1 | HL09_12947 | 2 | `<binary>` | NULL | 1 |
+| 12615 | I12-22 | 3 | `<binary>` | `<binary>` | 2 |
+| 16794 | 12540 | 4 | `<binary>` | NULL | 1 |
+
+Note:
+
+Many examples of hierarchical locations from each project. E.g.:
+- TVP has the Veii site, and various sites within it. Veii is a site in the RHP,
+  the sites (TVP) within it are subsites (RHP). We use the hierarchy to link them.
+- The subsite terminology is inspired by the Suburbium project, where it is
+  ubiquitous. Subsites are linked to sites via the hierarchy.
+- The PRP has units and sites, where sites might span many units - that's again
+  linked via the hierarchy.
+
+The example records excludes the `extent` and `notes` fields because that would 
+not fit, and they are empty for these records.
+
+Notice the `id_origin` field. Your original data is never far away!
+
+----
+
+## Location interpretations
+
+- Like TVP's `tvp_interpretation` and PRP's `prp_source_site_interpretation`.
+- Flexible. A location can have one or more records for:
+  - One or more interpretations over one or more periods, indicating site development, or multiple simultaneous roles.
+  - No interpretation over one or more periods, indicating existence but no clear role.
+  - One or more interpretations over no periods, indicating a role but unclear time delineation.
+- Certainties for the assigned period and interpretation.
+  - Currently one of `certain`, `probable`, and `uncertain`.
+- Example record (shortened):
+
+| id_location_interpretation | id_location | id_period | id_period_certainty | id_project |
+| --- | --- | --- |  --- | --- |
+| 1 | 825 | 14 | 2 | 2 |
+
+Note:
+
+Interpretations are done per period, where a period is historical. This is 
+different than e.g. the Suburbium data, so we did some mapping there.
+
+Corresponding tables are:
+- `prp_source_site_interpretation` (PRP)
+- `tvp_interpretation` (TVP)
+- `chronology` (RSP)
+
+The example record excludes the `notes`, `id_interpretation`, and 
+`id_interpretation_certainty` fields, because otherwise the table would not fit.
+Their meaning is hopefully straightforward.
+
+----
+
+## Interpretations
+
+TODO
+
+----
+
+## Periods
 
 TODO
 
@@ -225,7 +329,7 @@ project-specific terminology to our terms.
 
 We map to our new RHP types, so these mappings are very simple. All meta-data
 is with the new type lists, and not present in the project-specific mappings.
- 
+
 This is **much preferred** over keeping the original records, but cannot always
 be done.
 
@@ -263,11 +367,11 @@ add records with this interpretation as an RHP record with the type indicated
 by the _rhp_ column. That leads to a bit of 'duplication' (depending on your 
 perspective), but much more effective querying.
 
-Out names are always close to the _in_ name - _rhp_ names not necessarily!
+Out names are always similar to the _in_ name - _rhp_ names not necessarily!
 
 We only add something on top of project-specific data. This means you can query
-both by the project-specific interpretations (if you know them), or use our
-hierarchy to get the right results.
+both by the project-specific interpretations of the _out_ column (if you know
+them), or use our hierarchy to get the right results.
 
 This example only discusses the interpretations, but the same holds for
 periodisations.

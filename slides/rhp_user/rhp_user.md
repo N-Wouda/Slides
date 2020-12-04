@@ -12,7 +12,7 @@ Niels Wouda
 
 <br>
 
-<small>Speaker notes can be accessed via the `s` button</small>
+<small>Speaker notes can be accessed via the `s` key</small>
 
 Note:
 
