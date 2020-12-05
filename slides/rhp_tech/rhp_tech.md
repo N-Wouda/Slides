@@ -49,9 +49,11 @@ leave that up to you.
 
 Note:
 
-The tech stack is a simple SQL database, not unlike Access. PostGIS adds support
-for querying and storing geodata. That can be used directly (not recommended),
-or through another tool like gis.
+The tech stack is a simple SQL database. We use Postgres, which is similar to 
+Access (but does not come bundled with a viewer/visual query builder). PostGIS
+adds support for querying and storing geodata. That can be used directly, or 
+through some other tool (GIS/Python). The mapping process and database 
+versioning are done with Python (more in a few slides).
 
 Most data have been mapped over, in particular location data, site
 interpretations, and many diagnostics and other finds. Activities and survey
