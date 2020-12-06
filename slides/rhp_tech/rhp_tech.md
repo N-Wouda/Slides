@@ -67,9 +67,9 @@ Of course, the mapping process is still very laborious.
 
 ## Schema
 
-This is the lay-out of the RHPdb.
-
-![Schema](images/schema.png)
+<img width="85%" 
+     src="images/schema.svg" 
+     style="transform: rotate(90deg);  margin-top: -400px;" />
 
 Note:
 
