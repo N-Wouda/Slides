@@ -74,6 +74,9 @@ Of course, the mapping process is still very laborious.</p>
 
 <aside class="notes"><p>We will discuss this in detail in the next few slides, zooming in on each part
 of the database.</p>
+<p>We are not going to discuss <em>content</em> in detail (that&#39;s for the user meeting).
+Rather, we will walk through the structure of the RHPdb, including some example
+records, to get a feel for what&#39;s stored where.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 ## Projects
 
@@ -130,10 +133,7 @@ not fit, and they are empty for these records.</p>
 ## Location interpretations
 
 - Like TVP's `tvp_interpretation` and PRP's `prp_source_site_interpretation`.
-- Flexible. A location can have one or more records for:
-  - One or more interpretations over one or more periods, indicating site development, or multiple simultaneous roles.
-  - No interpretation over one or more periods, indicating existence but no clear role.
-  - One or more interpretations over no periods, indicating a role but unclear time delineation.
+- Flexible.
 - Certainties for the assigned period and interpretation.
   - Currently one of `certain`, `probable`, and `uncertain`.
 - Example record (shortened):
@@ -174,6 +174,17 @@ TODO
 Parts of it exist, parts do not - it is not really ready for querying, and still
 needs quite a bit of work.</p>
 <p>That work will not be done for the prototype.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Things not mapped
+
+- Coarse wares
+
+- TODO
+
+<aside class="notes"><p>This somewhat complements the discussion about the database schema, since in 
+part the schema will need to be updated to accommodate these. Here I want to
+present a list of content that we have not (yet) standardised, and is as such
+not in the RHPdb.</p>
 </aside></script></section></section><section  data-markdown><script type="text/template">
 # How we got here
 
@@ -249,7 +260,6 @@ typologies. Original typologies are not kept.
 </script></section><section data-markdown><script type="text/template">
 ## Mapping when original types are kept
 
-- Exclusively used for site interpretations (and periodisations).
 - Mapping is used to:
   - Translate non-English terminology,
   - Fix common spelling errors,
@@ -257,6 +267,8 @@ typologies. Original typologies are not kept.
     project-specific database.
 - These mapped (project-specific) values are then placed into a RHP type hierarchy.
 - New records are also inserted, using RHP typologies.
+
+(We used this for site interpretations and periodisations)
 
 <aside class="notes"><p>This is not a &#39;true&#39; mapping, in the sense that we do not really dispense with
 the old. Nonetheless, half the database consists of these types of records, and
@@ -271,6 +283,8 @@ that in the user meeting.</p>
 - This is far simpler.
 
 - Mapping takes a project-specific value and transforms it to the appropriate RHP term.
+
+- Controlled vocabulary.
 
 (We did this with finds artefacts, and in general with all well-understood typologies)
 
@@ -352,9 +366,76 @@ So now we have some mappings in (Excel) data files.. what's next?
 
 - Each mapper is responsible for populating one table of the RHP database.
 
-TODO
+- The RHPdb is completely reversible: adding and removing project data is fully
+  supported. That is useful when developing adding new projects/data.
 
 <aside class="notes"><p>TODO</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Developing mappers
+
+- Using and developing the RHP tool are explained in the wiki on GitHub:
+ - [Here](https://github.com/N-Wouda/RHP/wiki/How-to-develop) for setting everything up on your computer and understanding the structure of a Mapper,
+ - [Here](https://github.com/N-Wouda/RHP/wiki/How-to-use-the-RHP-tool) for running the RHP tool from the command line.
+- Mappers have the following (simplified) structure:
+
+```python
+class Mapper:
+    from_tables: List[str]
+    to_table: str
+    field_mapping: Dict[str, str]
+
+    def up(self):  # execute
+        data = self._read()
+        data = self._map(data)
+        self._write(data)
+
+    def down(self):  # rollback
+        self.write_connection().table(self.to_table).delete()
+```
+
+<aside class="notes"><p>TODO</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## A mapper example
+
+- Now that we have a basic understanding of the mapper structure, we can look
+  at a simple example.
+- This is Suburbium mapper responsible for mapping over all ARS artefacts:
+
+```python
+class AfricanRedSlipMapper(Mapper):
+    from_tables = ['mat_datanti']
+    to_table = 'artefacts'
+    field_mapping = {
+        'id_artefact_form': 'id_artefact_form',
+        'id_datanti': 'id_origin',
+    }
+
+    def _read(self):
+        # Based on MCC's comment in #84 - all ARS is SIGILLATA AFRICANA.
+        return [datum for datum in super()._read()
+                if datum['produzione'].startswith('AFRICANA')
+                if datum['classe'] == 'SIGILLATA']
+
+    def _map(self, data):
+        types = self._typology()
+
+        for datum in data:
+            datum['id_artefact_form'] = types[datum['tipo'].strip()]
+
+        return super()._map(data)
+
+    def _typology(self):
+        name2id = (self.write_connection()
+                   .table('artefact_forms')
+                   .get()
+                   .pluck('id_artefact_form', 'name'))
+
+        return {datum['in']: name2id[datum['out']] 
+                for datum in read_excel(self._project, 'african_red_slip.xlsx')}
+```
+
+<aside class="notes"><p>Simplified in parts to ease understanding.</p>
+<p>TODO</p>
 </aside></script></section></section><section ><section data-markdown><script type="text/template">
 # Extending the database
 </script></section><section data-markdown><script type="text/template">
@@ -372,7 +453,8 @@ TODO
 Orator, in particular its <a href="https://orator-orm.com/docs/0.9/migrations.html">migrations</a> 
 and <a href="https://orator-orm.com/docs/0.9/schema_builder.html">schema builder</a> functionality
 is used.</p>
-<p>For migrations: remember that strange table? It&#39;s tied to this!</p>
+<p>For migrations: remember that strange <code>migrations</code> table in the schema? It&#39;s
+tied to this!</p>
 </aside></script></section><section data-markdown><script type="text/template">
 ## Migrations
 
