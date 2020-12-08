@@ -79,6 +79,10 @@ Note:
 We will discuss this in detail in the next few slides, zooming in on each part
 of the database.
 
+We are not going to discuss *content* in detail (that's for the user meeting).
+Rather, we will walk through the structure of the RHPdb, including some example
+records, to get a feel for what's stored where.
+
 ----
 
 ## Projects
@@ -146,10 +150,7 @@ Notice the `id_origin` field. Your original data is never far away!
 ## Location interpretations
 
 - Like TVP's `tvp_interpretation` and PRP's `prp_source_site_interpretation`.
-- Flexible. A location can have one or more records for:
-  - One or more interpretations over one or more periods, indicating site development, or multiple simultaneous roles.
-  - No interpretation over one or more periods, indicating existence but no clear role.
-  - One or more interpretations over no periods, indicating a role but unclear time delineation.
+- Flexible.
 - Certainties for the assigned period and interpretation.
   - Currently one of `certain`, `probable`, and `uncertain`.
 - Example record (shortened):
@@ -203,6 +204,21 @@ Parts of it exist, parts do not - it is not really ready for querying, and still
 needs quite a bit of work.
 
 That work will not be done for the prototype.
+
+----
+
+## Things not mapped
+
+- Coarse wares
+
+- TODO
+
+Note:
+
+This somewhat complements the discussion about the database schema, since in 
+part the schema will need to be updated to accommodate these. Here I want to
+present a list of content that we have not (yet) standardised, and is as such
+not in the RHPdb. 
 
 ---
 
@@ -295,7 +311,6 @@ typologies. Original typologies are not kept.
 
 ## Mapping when original types are kept
 
-- Exclusively used for site interpretations (and periodisations).
 - Mapping is used to:
   - Translate non-English terminology,
   - Fix common spelling errors,
@@ -303,6 +318,8 @@ typologies. Original typologies are not kept.
     project-specific database.
 - These mapped (project-specific) values are then placed into a RHP type hierarchy.
 - New records are also inserted, using RHP typologies.
+
+(We used this for site interpretations and periodisations)
 
 Note:
 
@@ -323,6 +340,8 @@ that in the user meeting.
 - This is far simpler.
 
 - Mapping takes a project-specific value and transforms it to the appropriate RHP term.
+
+- Controlled vocabulary.
 
 (We did this with finds artefacts, and in general with all well-understood typologies)
 
@@ -429,9 +448,85 @@ This is to a large extent why this is the _technical_ meeting.
 
 - Each mapper is responsible for populating one table of the RHP database.
 
-TODO
+- The RHPdb is completely reversible: adding and removing project data is fully
+  supported. That is useful when developing adding new projects/data.
 
 Note:
+
+TODO
+
+----
+
+## Developing mappers
+
+- Using and developing the RHP tool are explained in the wiki on GitHub:
+ - [Here](https://github.com/N-Wouda/RHP/wiki/How-to-develop) for setting everything up on your computer and understanding the structure of a Mapper,
+ - [Here](https://github.com/N-Wouda/RHP/wiki/How-to-use-the-RHP-tool) for running the RHP tool from the command line.
+- Mappers have the following (simplified) structure:
+
+```python
+class Mapper:
+    from_tables: List[str]
+    to_table: str
+    field_mapping: Dict[str, str]
+
+    def up(self):  # execute
+        data = self._read()
+        data = self._map(data)
+        self._write(data)
+
+    def down(self):  # rollback
+        self.write_connection().table(self.to_table).delete()
+```
+
+Note:
+
+TODO
+
+----
+
+## A mapper example
+
+- Now that we have a basic understanding of the mapper structure, we can look
+  at a simple example.
+- This is Suburbium mapper responsible for mapping over all ARS artefacts:
+
+```python
+class AfricanRedSlipMapper(Mapper):
+    from_tables = ['mat_datanti']
+    to_table = 'artefacts'
+    field_mapping = {
+        'id_artefact_form': 'id_artefact_form',
+        'id_datanti': 'id_origin',
+    }
+
+    def _read(self):
+        # Based on MCC's comment in #84 - all ARS is SIGILLATA AFRICANA.
+        return [datum for datum in super()._read()
+                if datum['produzione'].startswith('AFRICANA')
+                if datum['classe'] == 'SIGILLATA']
+
+    def _map(self, data):
+        types = self._typology()
+
+        for datum in data:
+            datum['id_artefact_form'] = types[datum['tipo'].strip()]
+
+        return super()._map(data)
+
+    def _typology(self):
+        name2id = (self.write_connection()
+                   .table('artefact_forms')
+                   .get()
+                   .pluck('id_artefact_form', 'name'))
+
+        return {datum['in']: name2id[datum['out']] 
+                for datum in read_excel(self._project, 'african_red_slip.xlsx')}
+```
+
+Note:
+
+Simplified in parts to ease understanding.
 
 TODO
 
@@ -459,7 +554,8 @@ Orator, in particular its [migrations](https://orator-orm.com/docs/0.9/migration
 and [schema builder](https://orator-orm.com/docs/0.9/schema_builder.html) functionality
 is used.
 
-For migrations: remember that strange table? It's tied to this!
+For migrations: remember that strange `migrations` table in the schema? It's
+tied to this!
 
 ----
 
