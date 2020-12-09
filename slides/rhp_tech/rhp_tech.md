@@ -460,7 +460,7 @@ TODO
 ## Developing mappers
 
 - Using and developing the RHP tool are explained in the wiki on GitHub:
- - [Here](https://github.com/N-Wouda/RHP/wiki/How-to-develop) for setting everything up on your computer and understanding the structure of a Mapper,
+ - [Here](https://github.com/N-Wouda/RHP/wiki/How-to-develop) for setting everything up on your computer and understanding the structure of a Mapper.
  - [Here](https://github.com/N-Wouda/RHP/wiki/How-to-use-the-RHP-tool) for running the RHP tool from the command line.
 - Mappers have the following (simplified) structure:
 
@@ -489,7 +489,7 @@ TODO
 
 - Now that we have a basic understanding of the mapper structure, we can look
   at a simple example.
-- This is Suburbium mapper responsible for mapping over all ARS artefacts:
+- This Suburbium mapper is responsible for mapping over all ARS artefacts:
 
 ```python
 class AfricanRedSlipMapper(Mapper):
