@@ -141,7 +141,8 @@ Many examples of hierarchical locations from each project. E.g.:
   linked via the hierarchy.
 
 The example records excludes the `extent` and `notes` fields because that would 
-not fit, and they are empty for these records.
+not fit, and they are empty for these records. In `notes` we place existing 
+notes, and sometimes a new note explaining some mapping detail.
 
 Notice the `id_origin` field. Your original data is never far away!
 
@@ -453,7 +454,19 @@ This is to a large extent why this is the _technical_ meeting.
 
 Note:
 
-TODO
+The reason each project has its own mappers is that there is quite a bit of
+customer work needed to map all data over. Some projects store things _very_
+differently from how we designed the RHPdb, which means we need to write some
+code handling that diversity.
+ 
+This means new code will likely be necessary for future projects. A lot of
+existing work can likely be re-used in that case as well: this is already the
+case with the existing three projects as well.
+
+The RHPdb is the end result of these mappers. As such I never modify anything in
+the RHPdb itself: if something needs to be changed, a mapping or mapper should
+be updated instead. Sometimes the project databases are the ones that need to be
+updated (when we discover a mistake there). Never the RHPdb.
 
 ----
 
@@ -481,7 +494,28 @@ class Mapper:
 
 Note:
 
-TODO
+A mapper has two tasks, depending on what you want to do:
+- Insert its data into the appropriate RHP table
+- Remove that data
+
+These two tasks are implemented in the `up` (insert) and `down` (remove)
+methods. Both have defaults that are somewhat simplified here. `down` is less
+important: I have never had to implement it differently. `up` is less clear cut,
+and we will discuss that next.
+
+`up` has three steps: first, `_read` the data from project-specific table(s),
+then `_map` (transform) that data into something the RHPdb understands, and 
+finally `_write` that transformed data to the RHPdb table. Each of these methods
+have defaults, but those are not always sufficient: in particular `_map` is
+often overwritten.
+
+Observe that the Mapper class has some member data: `from_tables`, a list of
+table names in the project database that must be mapped, `to_table`, the name of
+the RHPdb table, and `field_mapping`, which is a (loose) mapping of
+project-specific column names to RHPdb column names.
+
+The full `Mapper` class has a few other methods that help implementing mappers,
+but are not as important to discuss here explicitly. 
 
 ----
 
@@ -489,39 +523,10 @@ TODO
 
 - Now that we have a basic understanding of the mapper structure, we can look
   at a simple example.
-- This Suburbium mapper is responsible for mapping over all ARS artefacts:
+- This mapper is TODO:
 
 ```python
-class AfricanRedSlipMapper(Mapper):
-    from_tables = ['mat_datanti']
-    to_table = 'artefacts'
-    field_mapping = {
-        'id_artefact_form': 'id_artefact_form',
-        'id_datanti': 'id_origin',
-    }
-
-    def _read(self):
-        # Based on MCC's comment in #84 - all ARS is SIGILLATA AFRICANA.
-        return [datum for datum in super()._read()
-                if datum['produzione'].startswith('AFRICANA')
-                if datum['classe'] == 'SIGILLATA']
-
-    def _map(self, data):
-        types = self._typology()
-
-        for datum in data:
-            datum['id_artefact_form'] = types[datum['tipo'].strip()]
-
-        return super()._map(data)
-
-    def _typology(self):
-        name2id = (self.write_connection()
-                   .table('artefact_forms')
-                   .get()
-                   .pluck('id_artefact_form', 'name'))
-
-        return {datum['in']: name2id[datum['out']] 
-                for datum in read_excel(self._project, 'african_red_slip.xlsx')}
+# TODO
 ```
 
 Note:
@@ -575,7 +580,7 @@ class CreateActors(Migration):
     def up(self):
         with self.schema.create('actors') as table:
             table.increments('id_actor')
-            table.string('name', 64)
+            table.string('name', 128)
 
     def down(self):
         self.schema.drop_if_exists('actors')
