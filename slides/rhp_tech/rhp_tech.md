@@ -34,11 +34,6 @@ Most of the presentation is kept rather simple, but some jargon is inevitable.
 
 - Extending the database
 
-Note:
-
-This is going to take a while. I suggest we have breaks every hour or so, but
-leave that up to you.
-
 ---
 
 # The database
@@ -140,9 +135,10 @@ Many examples of hierarchical locations from each project. E.g.:
 - The PRP has units and sites, where sites might span many units - that's again
   linked via the hierarchy.
 
-The example records excludes the `extent` and `notes` fields because that would 
-not fit, and they are empty for these records. In `notes` we place existing 
-notes, and sometimes a new note explaining some mapping detail.
+The example records excludes the `extent`, `notes`, and `rhp_notes` fields 
+because that would not fit, and they are empty for these records. In `notes` we
+place existing notes. In `rhp_notes` we sometimes add a new note explaining some
+mapping detail.
 
 Notice the `id_origin` field. Your original data is never far away!
 
@@ -178,13 +174,46 @@ Their meaning is hopefully straightforward.
 
 ## Interpretations
 
-TODO
+- List of interpretations, per project. Example records (shortened):
+| id_interpretation | name | id_project | definition |
+| --- | --- | --- | --- |
+| 6 | Infrastructure | 1 | `<text>` |
+| 22 | Travel and transport | 1 | `<text>` | 
+
+- Linked into a hierarchy via `interpretation_hierarchy` table:
+
+| id_interpretation_hierarchy | id_interpretation | id_parent |
+| --- | --- | --- |
+| 14 | 22 | 6 |
+| 26 | 33 | 22 |
+
+Note:
+
+Each interpretation has a name, a project origin (the examples are all new RHP
+types), and optional definitions, and period and size specifications (free-form
+text). 
+
+The hierarchy relates to Travel and Transport (first record it is a child under
+Infrastructure, in the second row it is the parent to some other interpretation
+with ID 33).
 
 ----
 
 ## Periods
 
-TODO
+- List of periods, per project. Example records (shortened):
+| id_period | name | start_year | end_year | id_project |
+| --- | --- | --- | --- | --- |
+| 8 | Iron Age | -1000 | -581 | 2 |
+| 140 | Iron Age | -1000 | -721 | 4 |
+
+- Linked into a hierarchy via `period_hierarchy` table (similar to previous
+  slide).
+
+Note:
+
+This is all very similar to the interpretations of the previous slide. Notice 
+that different projects have different year ranges for similar periods.
 
 ----
 
@@ -210,9 +239,14 @@ That work will not be done for the prototype.
 
 ## Things not mapped
 
-- Coarse wares
+- Coarse ware typology
 
-- TODO
+- Methodology: sampling method, land use, sources
+
+- (various details of) non-ceramics
+
+- ceramics: fragment types, fabrics, decorations (?)
+
 
 Note:
 
@@ -220,6 +254,19 @@ This somewhat complements the discussion about the database schema, since in
 part the schema will need to be updated to accommodate these. Here I want to
 present a list of content that we have not (yet) standardised, and is as such
 not in the RHPdb. 
+
+----
+
+## Not yet mapped
+
+- Ceramic shapes
+- Ceramic functions
+- Provenances/productions
+
+Note:
+
+These lists are (almost) all complete, but I have not yet implemented them
+(TODO 2/1/2021).
 
 ---
 
@@ -320,7 +367,7 @@ typologies. Original typologies are not kept.
 - These mapped (project-specific) values are then placed into a RHP type hierarchy.
 - New records are also inserted, using RHP typologies.
 
-(We used this for site interpretations and periodisations)
+(We used this for site types and periods)
 
 Note:
 
@@ -523,17 +570,15 @@ but are not as important to discuss here explicitly.
 
 - Now that we have a basic understanding of the mapper structure, we can look
   at a simple example.
-- This mapper is TODO:
-
-```python
-# TODO
-```
 
 Note:
 
-Simplified in parts to ease understanding.
+I'm going to show some examples in the code base, which is also on GitHub.
+The following are good candidates:
 
-TODO
+- PRP: LocationMapper, LocationHierarchyMapper, ArtefactMapper
+- RSP: SubsiteInterpretationMapper
+- TVP: LocationMapper
 
 ---
 
@@ -651,5 +696,5 @@ Of course this is non-trivial. But the point is that there are a lot of examples
  
 - To facilitate re-use, there are a lot of speaker notes in the presentation.
 
-- Anything unclear? Mail me at [nielswouda@gmail.com](mailto:nielswouda@gmail.com). 
- 
+- Anything unclear? Mail me at [nielswouda@gmail.com](mailto:nielswouda@gmail.com), 
+  or through the GitHub repository. 
