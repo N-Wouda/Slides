@@ -41,10 +41,7 @@ Most of the presentation is kept rather simple, but some jargon is inevitable.</
 - How we got there
 
 - Extending the database
-
-<aside class="notes"><p>This is going to take a while. I suggest we have breaks every hour or so, but
-leave that up to you.</p>
-</aside></script></section><section ><section data-markdown><script type="text/template">
+</script></section><section ><section data-markdown><script type="text/template">
 # The database
 
 - PostgreSQL, with PostGIS extension for geodata
@@ -126,9 +123,10 @@ ubiquitous. Subsites are linked to sites via the hierarchy.</li>
 <li>The PRP has units and sites, where sites might span many units - that&#39;s again
 linked via the hierarchy.</li>
 </ul>
-<p>The example records excludes the <code>extent</code> and <code>notes</code> fields because that would 
-not fit, and they are empty for these records. In <code>notes</code> we place existing 
-notes, and sometimes a new note explaining some mapping detail.</p>
+<p>The example records excludes the <code>extent</code>, <code>notes</code>, and <code>rhp_notes</code> fields 
+because that would not fit, and they are empty for these records. In <code>notes</code> we
+place existing notes. In <code>rhp_notes</code> we sometimes add a new note explaining some
+mapping detail.</p>
 <p>Notice the <code>id_origin</code> field. Your original data is never far away!</p>
 </aside></script></section><section data-markdown><script type="text/template">
 ## Location interpretations
@@ -157,12 +155,40 @@ Their meaning is hopefully straightforward.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 ## Interpretations
 
-TODO
-</script></section><section data-markdown><script type="text/template">
+- List of interpretations, per project. Example records (shortened):
+| id_interpretation | name | id_project | definition |
+| --- | --- | --- | --- |
+| 6 | Infrastructure | 1 | `<text>` |
+| 22 | Travel and transport | 1 | `<text>` | 
+
+- Linked into a hierarchy via `interpretation_hierarchy` table:
+
+| id_interpretation_hierarchy | id_interpretation | id_parent |
+| --- | --- | --- |
+| 14 | 22 | 6 |
+| 26 | 33 | 22 |
+
+<aside class="notes"><p>Each interpretation has a name, a project origin (the examples are all new RHP
+types), and optional definitions, and period and size specifications (free-form
+text). </p>
+<p>The hierarchy relates to Travel and Transport (first record it is a child under
+Infrastructure, in the second row it is the parent to some other interpretation
+with ID 33).</p>
+</aside></script></section><section data-markdown><script type="text/template">
 ## Periods
 
-TODO
-</script></section><section data-markdown><script type="text/template">
+- List of periods, per project. Example records (shortened):
+| id_period | name | start_year | end_year | id_project |
+| --- | --- | --- | --- | --- |
+| 8 | Iron Age | -1000 | -581 | 2 |
+| 140 | Iron Age | -1000 | -721 | 4 |
+
+- Linked into a hierarchy via `period_hierarchy` table (similar to previous
+  slide).
+
+<aside class="notes"><p>This is all very similar to the interpretations of the previous slide. Notice 
+that different projects have different year ranges for similar periods.</p>
+</aside></script></section><section data-markdown><script type="text/template">
 ## Finds
 
 TODO
@@ -178,14 +204,28 @@ needs quite a bit of work.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 ## Things not mapped
 
-- Coarse wares
+- Coarse ware typology
 
-- TODO
+- Methodology: sampling method, land use, sources
+
+- (various details of) non-ceramics
+
+- ceramics: fragment types, fabrics, decorations (?)
+
 
 <aside class="notes"><p>This somewhat complements the discussion about the database schema, since in 
 part the schema will need to be updated to accommodate these. Here I want to
 present a list of content that we have not (yet) standardised, and is as such
 not in the RHPdb.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Not yet mapped
+
+- Ceramic shapes
+- Ceramic functions
+- Provenances/productions
+
+<aside class="notes"><p>These lists are (almost) all complete, but I have not yet implemented them
+(TODO 2/1/2021).</p>
 </aside></script></section></section><section  data-markdown><script type="text/template">
 # How we got here
 
@@ -269,7 +309,7 @@ typologies. Original typologies are not kept.
 - These mapped (project-specific) values are then placed into a RHP type hierarchy.
 - New records are also inserted, using RHP typologies.
 
-(We used this for site interpretations and periodisations)
+(We used this for site types and periods)
 
 <aside class="notes"><p>This is not a &#39;true&#39; mapping, in the sense that we do not really dispense with
 the old. Nonetheless, half the database consists of these types of records, and
@@ -429,14 +469,14 @@ but are not as important to discuss here explicitly.</p>
 
 - Now that we have a basic understanding of the mapper structure, we can look
   at a simple example.
-- This mapper is TODO:
 
-```python
-# TODO
-```
-
-<aside class="notes"><p>Simplified in parts to ease understanding.</p>
-<p>TODO</p>
+<aside class="notes"><p>I&#39;m going to show some examples in the code base, which is also on GitHub.
+The following are good candidates:</p>
+<ul>
+<li>PRP: LocationMapper, LocationHierarchyMapper, ArtefactMapper</li>
+<li>RSP: SubsiteInterpretationMapper</li>
+<li>TVP: LocationMapper</li>
+</ul>
 </aside></script></section></section><section ><section data-markdown><script type="text/template">
 # Extending the database
 </script></section><section data-markdown><script type="text/template">
@@ -527,8 +567,9 @@ explained there.</p>
  
 - To facilitate re-use, there are a lot of speaker notes in the presentation.
 
-- Anything unclear? Mail me at [nielswouda@gmail.com](mailto:nielswouda@gmail.com). 
- </script></section></div>
+- Anything unclear? Mail me at [nielswouda@gmail.com](mailto:nielswouda@gmail.com), 
+  or through the GitHub repository. 
+</script></section></div>
     </div>
 
     <script src="./../dist/reveal.js"></script>
