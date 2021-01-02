@@ -143,4 +143,5 @@ TODO
  
 - To facilitate re-use, there are a lot of (speaker) notes in the presentation.
 
-- Anything unclear? Mail me at [nielswouda@gmail.com](mailto:nielswouda@gmail.com). 
+- Anything unclear? Mail me at [nielswouda@gmail.com](mailto:nielswouda@gmail.com), 
+  or contact me through the GitHub repository. 
