@@ -397,8 +397,6 @@ The difference between a mapping and a new typology is also important. The new
 types are defined first, and then a mapping is written. We focus on the mapping
 here, not the new types (that's for the user session).
 
-Examples follow in a little bit!
-
 ----
 
 ## Mapping types
@@ -409,59 +407,9 @@ Examples follow in a little bit!
 - In other cases we fully integrate the project-specific data using new RHP
 typologies. Original typologies are not kept.
 
-----
-
-## Mapping when original types are kept
-
-- Mapping is used to:
-  - Translate non-English terminology,
-  - Fix common spelling errors,
-  - Insert important meta-data (_e.g._ definitions) not found in the 
-    project-specific database.
-- These mapped (project-specific) values are then placed into a RHP type hierarchy.
-- New records are also inserted, using RHP typologies.
-
-(We used this for site types and periods)
-
 Note:
 
-This is not a 'true' mapping, in the sense that we do not really dispense with
-the old. Nonetheless, half the database consists of these types of records, and
-it is important to understand there are two types of mappings in play.
-
-We will see an example of this shortly. 
-
-Because we keep the original data insofar possible and also have the new RHP
-records, queries require some nuance to avoid duplicate counting. We will discuss
-that in the user meeting.
-
-----
-
-## Mapping when original types are not kept
-
-- This is far simpler.
-
-- Mapping takes a project-specific value and transforms it to the appropriate RHP term.
-
-- Controlled vocabulary.
-
-(We did this with finds artefacts, and in general with all well-understood typologies)
-
-Note:
-
-This is conceptually the easiest type of mapping, because no old values are kept
-at all. Instead, we introduce our own terms for everything and match each 
-project-specific terminology to our terms.
-
-We map to our new RHP types, so these mappings are very simple. All meta-data
-is with the new type lists, and not present in the project-specific mappings.
-
-This is **much preferred** over keeping the original records, but cannot always
-be done.
-
-----
-
-## Some examples
+Let's first have a look at two examples!
 
 ----
 
@@ -529,6 +477,56 @@ RHPdb.
 
 These sorts of mappings (where the old types are not kept) are very simple, and
 always have at least an _in_ and _out_ column.
+
+----
+
+## Mapping when original types are kept
+
+- Mapping is used to:
+  - Translate non-English terminology,
+  - Fix common spelling errors,
+  - Insert important meta-data (_e.g._ definitions) not found in the 
+    project-specific database.
+- These mapped (project-specific) values are then placed into a RHP type hierarchy.
+- New records are also inserted, using RHP typologies.
+
+(We used this for site types and periods)
+
+Note:
+
+This is not a 'true' mapping, in the sense that we do not really dispense with
+the old. Nonetheless, half the database consists of these types of records, and
+it is important to understand there are two types of mappings in play.
+
+We will see an example of this shortly. 
+
+Because we keep the original data insofar possible and also have the new RHP
+records, queries require some nuance to avoid duplicate counting. We will discuss
+that in the user meeting.
+
+----
+
+## Mapping when original types are not kept
+
+- This is far simpler.
+
+- Mapping takes a project-specific value and transforms it to the appropriate RHP term.
+
+- Controlled vocabulary.
+
+(We did this with finds artefacts, and in general with all well-understood typologies)
+
+Note:
+
+This is conceptually the easiest type of mapping, because no old values are kept
+at all. Instead, we introduce our own terms for everything and match each 
+project-specific terminology to our terms.
+
+We map to our new RHP types, so these mappings are very simple. All meta-data
+is with the new type lists, and not present in the project-specific mappings.
+
+This is **much preferred** over keeping the original records, but cannot always
+be done.
 
 ---
 
