@@ -117,13 +117,13 @@ are not that different from the project-specific efforts.
   - Interpretation is stored in the `location_interpretations` table, as one 
     record per (interpretation, period)-pair.
 - Geodata (`point` and/or `polygon` fields).
-- Example records (shortened, one from each project):
+- Examples (shortened, one from each project):
 
 | id_location | id_origin | id_project | point | polygon | id_location_type |
 | --- | --- | --- | --- | --- | --- |
-| 1 | HL09_12947 | 2 | `<binary>` | NULL | 1 |
+| 1 | HL09_12947 | 2 | `<binary>` | | 1 |
 | 12615 | I12-22 | 3 | `<binary>` | `<binary>` | 2 |
-| 16794 | 12540 | 4 | `<binary>` | NULL | 1 |
+| 16794 | 12540 | 4 | `<binary>` | | 1 |
 
 Note:
 
@@ -150,7 +150,7 @@ Notice the `id_origin` field. Your original data is never far away!
 - Flexible.
 - Certainties for the assigned period and interpretation.
   - Currently one of `certain`, `probable`, and `uncertain`.
-- Example record (shortened):
+- Example (shortened):
 
 | id_location_interpretation | id_location | id_period | id_period_certainty | id_project |
 | --- | --- | --- |  --- | --- |
@@ -174,14 +174,13 @@ Their meaning is hopefully straightforward.
 
 ## Interpretations
 
-- List of interpretations, per project. Example records (shortened):
+- List of interpretations, per project. Examples (shortened):
 | id_interpretation | name | id_project | definition |
 | --- | --- | --- | --- |
 | 6 | Infrastructure | 1 | `<text>` |
 | 22 | Travel and transport | 1 | `<text>` | 
 
 - Linked into a hierarchy via `interpretation_hierarchy` table:
-
 | id_interpretation_hierarchy | id_interpretation | id_parent |
 | --- | --- | --- |
 | 14 | 22 | 6 |
@@ -201,7 +200,7 @@ with ID 33).
 
 ## Periods
 
-- List of periods, per project. Example records (shortened):
+- List of periods, per project. Examples (shortened):
 | id_period | name | start_year | end_year | id_project |
 | --- | --- | --- | --- | --- |
 | 8 | Iron Age | -1000 | -581 | 2 |
@@ -219,7 +218,63 @@ that different projects have different year ranges for similar periods.
 
 ## Finds
 
-TODO
+- Diagnostics and non-diagnostics are both in the `artefacts` table.
+  Examples (shortened):
+| id_artefact | id_artefact_type | id_project |  number |  id_ware | is_diagnostic | weight |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 536 | 2 | 1 | 3 | true | |
+| 24167 | 42 | 3 | 1 | 3 | true | |
+| 35559 | | 4 | 1 | 1 | true | 9 |
+
+- (Ceramic) typologies in the `artefact_types` table.
+
+- Wares in the `wares` table.
+
+Note:
+
+For the examples I did not display the `id_origin` (sherd ID in project databases)
+and `rhp_notes` (RHP implementation details, where applicable) columns.
+
+----
+
+## Artefact types
+
+- Typologies, currently only for ceramics
+
+- Example records:
+| id_artefact_type | name | start_year | end_year |
+| --- | --- | --- | --- |
+| 15 | Hayes 181 | 100 | 300 | 
+| 393 | Dressel 1 | -130 | -10 |
+
+- There is also a `provenance` column which is currently free-form text, and
+  awaits standardisation.
+  
+Note:
+
+Provenances are being standardised, but it is not completely implemented yet. 
+
+----
+
+## Wares
+
+- Ceramic wares
+
+- Example records:
+| id_ware | name | id_parent |
+| --- | --- | --- |
+| 2 | Fine ware | |
+| 3 | Coarse ware | |
+| 23 | Eastern sigillata | 2 |
+| 24 | African red slip ware | 2 |
+| 25 | Impasto chiaro sabbioso | 3 |
+| 26 | Pompeian red ware | 3 |
+
+Note:
+
+The `id_parent` column references back into the `wares` table. So `Eastern
+sigillata` is a `Fine ware` (under `2`), and `Pompeian red ware` is a `Coarse
+ware` (under `3`).
 
 ----
 
@@ -241,12 +296,11 @@ That work will not be done for the prototype.
 
 - Coarse ware typology
 
-- Methodology: sampling method, land use, sources
+- Methodology: sampling method, land use, sources (all part of activities)
 
 - (various details of) non-ceramics
 
 - ceramics: fragment types, fabrics, decorations (?)
-
 
 Note:
 
@@ -266,7 +320,7 @@ not in the RHPdb.
 Note:
 
 These lists are (almost) all complete, but I have not yet implemented them
-(TODO 2/1/2021).
+(TODO 2/1/2021). I want to do so later this month.
 
 ---
 
