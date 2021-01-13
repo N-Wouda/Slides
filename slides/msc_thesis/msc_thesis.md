@@ -26,6 +26,32 @@ TODO DATE
 
 # Setting
 
+- Two scenarios
+
+----
+
+## Land-based electrolysers
+
+<img width="80%" 
+     src="images/onshore.svg" />
+
+<!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
+<!--- ![Schema](images/onshore.svg) --->
+
+----
+
+## Everything offshore
+
+<img width="80%" 
+     src="images/offshore.svg" />
+
+<!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
+<!--- ![Schema](images/offshore.svg) --->
+
+----
+
+TODO
+
 ---
 
 # Results
