@@ -15,7 +15,7 @@
         "hideMissingTitles": true
     },
     "math": {
-        "Tex": {
+        "TeX": {
             "jax": [
                 "input/TeX",
                 "output/SVG"

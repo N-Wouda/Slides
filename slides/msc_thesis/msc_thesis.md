@@ -1,5 +1,10 @@
 ---
 title: Planning green hydrogen production on the Dutch North Sea
+revealOptions:
+    math:
+        TeX:
+            extensions:
+                - mhchem.js
 ---
 
 # Planning green hydrogen production
@@ -13,8 +18,7 @@ Niels Wouda
 TODO DATE
 
 ---
-
-# This presentation
+s# This presentation
 
 - Problem setting
 
@@ -22,11 +26,39 @@ TODO DATE
 
 - Conclusion
 
+Note:
+
+TODO
+
 ---
 
 # Setting
 
+- Hydrogen production from (offshore) wind electricity
+
+- Electrolysis: $\ce{2H2O + electricity -> 2H2 + O2}$ 
+
+- My thesis:
+
+  - Where do we place wind parks?
+  
+  - Where do we place electrolysers?
+
+Note:
+
+TODO
+
+----
+
+# Setting
+
 - Two scenarios
+  - Land
+  - Offshore
+
+Note:
+
+TODO
 
 ----
 
@@ -38,6 +70,10 @@ TODO DATE
 <!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
 <!--- ![Schema](images/onshore.svg) --->
 
+Note:
+
+TODO
+
 ----
 
 ## Everything offshore
@@ -48,9 +84,17 @@ TODO DATE
 <!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
 <!--- ![Schema](images/offshore.svg) --->
 
-----
+Note:
 
 TODO
+
+----
+
+TODO:
+
+- Wind intermittency
+
+- Stoch prog?
 
 ---
 
@@ -63,6 +107,12 @@ TODO
 ## Scenarios
 
 TODO
+
+----
+
+## Stochastic solution
+
+TODO comparison/imports?
 
 ----
 
