@@ -18,7 +18,8 @@ Niels Wouda
 TODO DATE
 
 ---
-s# This presentation
+
+# This presentation
 
 - Problem setting
 
