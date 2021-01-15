@@ -32,11 +32,31 @@ TODO DATE
 - Results
 
 - Conclusion
-</script></section><section ><section data-markdown><script type="text/template">
+
+<aside class="notes"><p>TODO</p>
+</aside></script></section><section ><section data-markdown><script type="text/template">
+# Setting
+
+- Hydrogen production from (offshore) wind electricity
+
+- Electrolysis: $\ce{2H2O + electricity -> 2H2 + O2}$ 
+
+- My thesis:
+
+  - Where do we place wind parks?
+  
+  - Where do we place electrolysers?
+
+<aside class="notes"><p>TODO</p>
+</aside></script></section><section data-markdown><script type="text/template">
 # Setting
 
 - Two scenarios
-</script></section><section data-markdown><script type="text/template">
+  - Land
+  - Offshore
+
+<aside class="notes"><p>TODO</p>
+</aside></script></section><section data-markdown><script type="text/template">
 ## Land-based electrolysers
 
 <img width="80%" 
@@ -44,7 +64,9 @@ TODO DATE
 
 <!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
 <!--- ![Schema](images/onshore.svg) --->
-</script></section><section data-markdown><script type="text/template">
+
+<aside class="notes"><p>TODO</p>
+</aside></script></section><section data-markdown><script type="text/template">
 ## Everything offshore
 
 <img width="80%" 
@@ -52,8 +74,14 @@ TODO DATE
 
 <!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
 <!--- ![Schema](images/offshore.svg) --->
-</script></section><section data-markdown><script type="text/template">
-TODO
+
+<aside class="notes"><p>TODO</p>
+</aside></script></section><section data-markdown><script type="text/template">
+TODO:
+
+- Wind intermittency
+
+- Stoch prog?
 </script></section></section><section ><section data-markdown><script type="text/template">
 # Results
 
@@ -62,6 +90,10 @@ TODO
 ## Scenarios
 
 TODO
+</script></section><section data-markdown><script type="text/template">
+## Stochastic solution
+
+TODO comparison/imports?
 </script></section><section data-markdown><script type="text/template">
 ## Sensitivity analysis
 
@@ -115,7 +147,7 @@ TODO
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"width":1600,"height":1050,"transition":"slide","slideNumber":"c","chalkboard":{"grid":false,"theme":"whiteboard","toggleChalkboardButton":false,"toggleNotesButton":false},"menu":{"numbers":"c","markers":false,"hideMissingTitles":true},"math":{"Tex":{"jax":["input/TeX","output/SVG"]}}}, queryOptions);
+      var options = extend(defaultOptions, {"math":{"TeX":{"extensions":["mhchem.js"]}},"width":1600,"height":1050,"transition":"slide","slideNumber":"c","chalkboard":{"grid":false,"theme":"whiteboard","toggleChalkboardButton":false,"toggleNotesButton":false},"menu":{"numbers":"c","markers":false,"hideMissingTitles":true}}, queryOptions);
     </script>
 
     <script src="./../_assets/plugin/chalkboard/plugin.js"></script>
