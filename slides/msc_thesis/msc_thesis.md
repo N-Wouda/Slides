@@ -15,7 +15,11 @@ on the Dutch North Sea
 
 Niels Wouda
 
-TODO DATE
+01-02-2021
+
+<br>
+
+<small>(feel free to ask questions during the presentation)</small>
 
 ---
 
@@ -33,17 +37,17 @@ TODO
 
 ---
 
-# Setting
+# Problem setting
 
-- Hydrogen production from (offshore) wind electricity
+----
+
+## Setting
+
+- Hydrogen production from offshore wind electricity
 
 - Electrolysis: $\ce{2H2O + electricity -> 2H2 + O2}$ 
 
-- My thesis:
-
-  - Where do we place wind parks?
-  
-  - Where do we place electrolysers?
+- Wind intermittency (randomness)
 
 Note:
 
@@ -51,15 +55,19 @@ TODO
 
 ----
 
-# Setting
-
-- Two scenarios
-  - Land
-  - Offshore
+# Research questions
+  
+- Where do we place electrolysers?
+    - On land, or
+    - Offshore, on artificial islands or re-used gas platforms?
+- What about robust solutions?  
+- What about parameter sensitivity?
 
 Note:
 
 TODO
+
+Robust wrt wind randomness
 
 ----
 
@@ -67,8 +75,7 @@ TODO
 
 <img width="80%" 
      src="images/onshore.svg" />
-
-<!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
+     
 <!--- ![Schema](images/onshore.svg) --->
 
 Note:
@@ -77,13 +84,39 @@ TODO
 
 ----
 
-## Everything offshore
+## Offshore electrolysers
 
 <img width="80%" 
      src="images/offshore.svg" />
-
-<!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
+     
 <!--- ![Schema](images/offshore.svg) --->
+
+Note:
+
+TODO
+
+---
+
+# Results
+
+- LCoH$_2$: levelised cost of hydrogen (€/kg)
+
+Note:
+
+Remember LCoH$_2$ as the _production cost_ of a kilogram of hydrogen.
+This is similar to how electricity is priced when constructing new power plants
+or energy systems: as the levelised cost of electricity (LCoE).
+
+----
+
+## Deterministic solution
+
+<img width="120%" src="images/lcoh2.svg" />
+<!--- ![Schema](images/offshore.svg) --->
+
+Compare:
+ - Dutch electricity use is about 110TWh/y
+ - Total Dutch energy use is about 650TWh/y
 
 Note:
 
@@ -91,39 +124,82 @@ TODO
 
 ----
 
-TODO:
+# Recourse solution
 
-- Wind intermittency
+<img width="45%" src="images/stoch_lcoh2.svg" />
+<img width="45.3%" src="images/stoch_imports.svg" />
 
-- Stoch prog?
+<!--- ![Schema](images/offshore.svg) --->
+<!--- ![Schema](images/stoch_imports.svg) --->
 
----
+($\lambda$: the LCoH$_2$ of stored/imported hydrogen)
 
-# Results
-
-TODO
-
-----
-
-## Scenarios
+Note:
 
 TODO
 
 ----
 
-## Stochastic solution
+# Robustness
 
-TODO comparison/imports?
+<img src="images/10gw_reliability.svg" />
+<!--- ![Schema](images/10gw_reliability.svg) --->
+
+- Service level as a function of $\delta \ge 0$
+
+- Robust solutions are rather cheap!
+
+Note:
+
+This is usually achieved via a (joint) chance constraint in the model formulation.
+That did not solve, so instead we built a little overcapacity using the regular,
+deterministic formulation. That is very effective in practice.
+
+Given a demand target $d$, we plant $(1 + \delta) d$ instead, for some overcapacity
+parameter $\delta \ge 0$.
+
+(this figure based on 10GW/88TWh annually)
+
+Observations:
+
+- At $\delta=0$% (no overcapacity), the solutions generally have a 50/50 chance of producing
+  sufficient hydrogen in a year.
+- That scales _rapidly_ as we increase the overcapacity. At $\delta=5$% the
+  empirical service level already reaches 98.2% (based on 10,000 samples).
 
 ----
 
 ## Sensitivity analysis
 
+<img src="images/one_way_sensitivity.svg" />
+<!--- ![Schema](images/one_way_sensitivity.svg) --->
+
+Note:
+
+Here we vary individual parameters w.r.t. their baseline parameter levels.
+
 TODO
+
+There's also a two-way sensitivity plot (where we study the interaction of
+two parameter level changes at the same time), but that is nearly impossible to
+read from a slide. So for that thing you'll have to read my thesis :).
 
 ---
 
 # Conclusion
+
+- Construct electrolysers on land, or on artificial islands
+- Existing gas platforms have no (serious) place in the green hydrogen production chain
+- At the national scale, robustness is cheap (+5% cost on average, for a service level around 98-99%)
+- Green hydrogen can be produced today at costs around €4-4.5/kg
+- Costs are sensitive to
+  - Capital costs
+  - Electrolyser efficiencies
+  - Wind capacity factors
+  
+  But these are all steadily improving!
+
+Note:
 
 TODO
 
