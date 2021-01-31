@@ -112,7 +112,7 @@ or energy systems: as the levelised cost of electricity (LCoE).
 ## Deterministic solution
 
 <img width="120%" src="images/lcoh2.svg" />
-<!--- ![Schema](images/offshore.svg) --->
+<!--- ![Schema](images/lcoh2.svg) --->
 
 Compare:
  - Dutch electricity use is about 110TWh/y
@@ -129,7 +129,7 @@ TODO
 <img width="45%" src="images/stoch_lcoh2.svg" />
 <img width="45.3%" src="images/stoch_imports.svg" />
 
-<!--- ![Schema](images/offshore.svg) --->
+<!--- ![Schema](images/stoch_lcoh2.svg) --->
 <!--- ![Schema](images/stoch_imports.svg) --->
 
 ($\lambda$: the LCoH$_2$ of stored/imported hydrogen)
