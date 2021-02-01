@@ -15,7 +15,7 @@ on the Dutch North Sea
 
 Niels Wouda
 
-01-02-2021
+26-02-2021
 
 <br>
 
@@ -55,13 +55,13 @@ TODO
 
 ----
 
-# Research questions
+## Research questions
   
 - Where do we place electrolysers?
     - On land, or
     - Offshore, on artificial islands or re-used gas platforms?
-- What about robust solutions?  
-- What about parameter sensitivity?
+- How do we obtain robust solutions?
+- Which parameters particularly influence production costs?
 
 Note:
 
@@ -73,9 +73,7 @@ Robust wrt wind randomness
 
 ## Land-based electrolysers
 
-<img width="80%" 
-     src="images/onshore.svg" />
-     
+<img width="80%" src="images/onshore.svg" />
 <!--- ![Schema](images/onshore.svg) --->
 
 Note:
@@ -86,9 +84,7 @@ TODO
 
 ## Offshore electrolysers
 
-<img width="80%" 
-     src="images/offshore.svg" />
-     
+<img width="80%" src="images/offshore.svg" />
 <!--- ![Schema](images/offshore.svg) --->
 
 Note:
@@ -102,6 +98,9 @@ TODO
 - LCoH$_2$: levelised cost of hydrogen (€/kg)
 
 Note:
+
+Rather than the objective values, we present costs as LCoH$_2$ to facilitate
+comparison across demand levels.
 
 Remember LCoH$_2$ as the _production cost_ of a kilogram of hydrogen.
 This is similar to how electricity is priced when constructing new power plants
@@ -124,7 +123,7 @@ TODO
 
 ----
 
-# Recourse solution
+## Recourse solution
 
 <img width="45%" src="images/stoch_lcoh2.svg" />
 <img width="45.3%" src="images/stoch_imports.svg" />
@@ -132,22 +131,24 @@ TODO
 <!--- ![Schema](images/stoch_lcoh2.svg) --->
 <!--- ![Schema](images/stoch_imports.svg) --->
 
-($\lambda$: the LCoH$_2$ of stored/imported hydrogen)
+($\lambda$: LCoH$_2$ of stored/imported hydrogen)
 
 Note:
 
-TODO
+TODO _maybe_ slide on recourse?
 
 ----
 
-# Robustness
-
-<img src="images/10gw_reliability.svg" />
-<!--- ![Schema](images/10gw_reliability.svg) --->
+## Robustness
 
 - Service level as a function of $\delta \ge 0$
 
 - Robust solutions are rather cheap!
+
+<img src="images/10gw_reliability.svg" />
+<!--- ![Schema](images/10gw_reliability.svg) --->
+
+($\delta$: given a demand target $d \ge 0$, the model assumes demand $(1 + \delta)d$)
 
 Note:
 
@@ -173,6 +174,14 @@ Observations:
 
 <img src="images/one_way_sensitivity.svg" />
 <!--- ![Schema](images/one_way_sensitivity.svg) --->
+
+Particularly important:
+
+- Wind and electrolyser construction costs (CAPEX)
+
+- Electrolyser efficiency
+
+- Average wind capacity factor
 
 Note:
 
@@ -201,7 +210,14 @@ read from a slide. So for that thing you'll have to read my thesis :).
 
 Note:
 
-TODO
+And future research. In particular: 
+
+- How much storage is needed? Is that worthwhile compared to overcapacity?
+
+- Better wind capacity factor modelling. This is rather difficult due to limited
+  (public) data availability for offshore wind.
+  
+- What about _time_, rather than _space_? Hydrogen deployment pathways?
 
 ---
 
