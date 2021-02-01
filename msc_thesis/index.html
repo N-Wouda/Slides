@@ -23,7 +23,7 @@ on the Dutch North Sea
 
 Niels Wouda
 
-01-02-2021
+26-02-2021
 
 <br>
 
@@ -51,31 +51,27 @@ Niels Wouda
 
 <aside class="notes"><p>TODO</p>
 </aside></script></section><section data-markdown><script type="text/template">
-# Research questions
+## Research questions
   
 - Where do we place electrolysers?
     - On land, or
     - Offshore, on artificial islands or re-used gas platforms?
-- What about robust solutions?  
-- What about parameter sensitivity?
+- How do we obtain robust solutions?
+- Which parameters particularly influence production costs?
 
 <aside class="notes"><p>TODO</p>
 <p>Robust wrt wind randomness</p>
 </aside></script></section><section data-markdown><script type="text/template">
 ## Land-based electrolysers
 
-<img width="80%" 
-     src="images/onshore.svg" />
-     
+<img width="80%" src="images/onshore.svg" />
 <!--- ![Schema](images/onshore.svg) --->
 
 <aside class="notes"><p>TODO</p>
 </aside></script></section><section data-markdown><script type="text/template">
 ## Offshore electrolysers
 
-<img width="80%" 
-     src="images/offshore.svg" />
-     
+<img width="80%" src="images/offshore.svg" />
 <!--- ![Schema](images/offshore.svg) --->
 
 <aside class="notes"><p>TODO</p>
@@ -84,7 +80,9 @@ Niels Wouda
 
 - LCoH$_2$: levelised cost of hydrogen (€/kg)
 
-<aside class="notes"><p>Remember LCoH$<em>2$ as the _production cost</em> of a kilogram of hydrogen.
+<aside class="notes"><p>Rather than the objective values, we present costs as LCoH$_2$ to facilitate
+comparison across demand levels.</p>
+<p>Remember LCoH$<em>2$ as the _production cost</em> of a kilogram of hydrogen.
 This is similar to how electricity is priced when constructing new power plants
 or energy systems: as the levelised cost of electricity (LCoE).</p>
 </aside></script></section><section data-markdown><script type="text/template">
@@ -99,7 +97,7 @@ Compare:
 
 <aside class="notes"><p>TODO</p>
 </aside></script></section><section data-markdown><script type="text/template">
-# Recourse solution
+## Recourse solution
 
 <img width="45%" src="images/stoch_lcoh2.svg" />
 <img width="45.3%" src="images/stoch_imports.svg" />
@@ -107,18 +105,20 @@ Compare:
 <!--- ![Schema](images/stoch_lcoh2.svg) --->
 <!--- ![Schema](images/stoch_imports.svg) --->
 
-($\lambda$: the LCoH$_2$ of stored/imported hydrogen)
+($\lambda$: LCoH$_2$ of stored/imported hydrogen)
 
-<aside class="notes"><p>TODO</p>
+<aside class="notes"><p>TODO <em>maybe</em> slide on recourse?</p>
 </aside></script></section><section data-markdown><script type="text/template">
-# Robustness
-
-<img src="images/10gw_reliability.svg" />
-<!--- ![Schema](images/10gw_reliability.svg) --->
+## Robustness
 
 - Service level as a function of $\delta \ge 0$
 
 - Robust solutions are rather cheap!
+
+<img src="images/10gw_reliability.svg" />
+<!--- ![Schema](images/10gw_reliability.svg) --->
+
+($\delta$: given a demand target $d \ge 0$, the model assumes demand $(1 + \delta)d$)
 
 <aside class="notes"><p>This is usually achieved via a (joint) chance constraint in the model formulation.
 That did not solve, so instead we built a little overcapacity using the regular,
@@ -139,6 +139,14 @@ empirical service level already reaches 98.2% (based on 10,000 samples).</li>
 <img src="images/one_way_sensitivity.svg" />
 <!--- ![Schema](images/one_way_sensitivity.svg) --->
 
+Particularly important:
+
+- Wind and electrolyser construction costs (CAPEX)
+
+- Electrolyser efficiency
+
+- Average wind capacity factor
+
 <aside class="notes"><p>Here we vary individual parameters w.r.t. their baseline parameter levels.</p>
 <p>TODO</p>
 <p>There&#39;s also a two-way sensitivity plot (where we study the interaction of
@@ -158,7 +166,16 @@ read from a slide. So for that thing you&#39;ll have to read my thesis :).</p>
   
   But these are all steadily improving!
 
-<aside class="notes"><p>TODO</p>
+<aside class="notes"><p>And future research. In particular: </p>
+<ul>
+<li><p>How much storage is needed? Is that worthwhile compared to overcapacity?</p>
+</li>
+<li><p>Better wind capacity factor modelling. This is rather difficult due to limited
+(public) data availability for offshore wind.</p>
+</li>
+<li><p>What about <em>time</em>, rather than <em>space</em>? Hydrogen deployment pathways?</p>
+</li>
+</ul>
 </aside></script></section><section  data-markdown><script type="text/template">
 # Questions?
 </script></section></div>
