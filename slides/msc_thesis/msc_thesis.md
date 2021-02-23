@@ -1,5 +1,6 @@
 ---
 title: Planning green hydrogen production on the Dutch North Sea
+theme: black
 revealOptions:
     math:
         TeX:
@@ -110,7 +111,7 @@ or energy systems: as the levelised cost of electricity (LCoE).
 
 ## Deterministic solution
 
-<img width="120%" src="images/lcoh2.svg" />
+<img width="120%" src="images/lcoh2.svg" style="background-color:white;" />
 <!--- ![Schema](images/lcoh2.svg) --->
 
 Compare:
@@ -125,8 +126,11 @@ TODO
 
 ## Recourse solution
 
-<img width="45%" src="images/stoch_lcoh2.svg" />
-<img width="45.3%" src="images/stoch_imports.svg" />
+<div style="height: 50vh;">
+    <img height="100%" src="images/stoch_lcoh2.svg" style="background-color:white;"/>
+    <img height="100%" src="images/stoch_imports.svg" style="background-color:white;"/>
+</div>
+
 
 <!--- ![Schema](images/stoch_lcoh2.svg) --->
 <!--- ![Schema](images/stoch_imports.svg) --->
@@ -145,10 +149,10 @@ TODO _maybe_ slide on recourse?
 
 - Robust solutions are rather cheap!
 
-<img src="images/10gw_reliability.svg" />
-<!--- ![Schema](images/10gw_reliability.svg) --->
+<img src="images/reliability.svg" style="background-color:white;" />
+<!--- ![Schema](images/reliability.svg) --->
 
-($\delta$: given a demand target $d \ge 0$, the model assumes demand $(1 + \delta)d$)
+($\delta$: percentage overcapacity in electricity generation relative to a demand target $d \ge 0$)
 
 Note:
 
@@ -172,7 +176,7 @@ Observations:
 
 ## Sensitivity analysis
 
-<img src="images/one_way_sensitivity.svg" />
+<img src="images/one_way_sensitivity.svg" style="background-color:white;" />
 <!--- ![Schema](images/one_way_sensitivity.svg) --->
 
 Particularly important:
