@@ -192,6 +192,36 @@ or energy systems: as the levelised cost of electricity (LCoE).
 
 ----
 
+## An example solution
+
+<div style="display: flex; align-items: center; justify-content: center; height: 70vh;">
+<img height="100%" src="images/example_solution.svg" style="background-color: white;"/>
+<!-- ![Example solution](images/example_solution.svg) -->
+<div style="margin-left: 20px; margin-top: auto; margin-bottom: auto;">
+
+- No platforms are re-used!
+
+- Preference for southern North Sea
+
+</div>
+</div>
+
+Note:
+
+Before we look at general figures, it might be helpful to get a feel of the scale
+of these solutions, and what I propose in practice. This is an example solution
+for about 2.5Mt of annual hydrogen production. That's roughly half of what the
+chemical industry alone will need annually.
+
+**Explain figure (draw)**
+
+No platforms are re-used here.
+
+Preference for the southern North Sea is easy to explain: it's much shallower.
+This is a lot cheaper than constructing far offshore.
+
+----
+
 ## Deterministic solution
 
 <img width="120%" src="images/lcoh2.svg" style="background-color:white;" />
@@ -229,7 +259,6 @@ We now turn to the stochastic model, and limiting shortfalls in production.
     <img width="48.3%" src="images/stoch_lcoh2.svg" style="background-color:white;"/>
     <img width="50%" src="images/stoch_imports.svg" style="background-color:white; margin-left: 20px;"/>
 </div>
-
 
 <!--- ![Schema](images/stoch_lcoh2.svg) --->
 <!--- ![Schema](images/stoch_imports.svg) --->
