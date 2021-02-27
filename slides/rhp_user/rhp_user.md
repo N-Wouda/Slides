@@ -64,19 +64,6 @@ Same as with the technical presentation on 4/1/21.
 
 ----
 
-## Soon in the database
-
-- Ceramic shapes
-- Ceramic functions
-- Provenances/productions
-
-Note:
-
-These lists are (almost) all complete, but I have not yet implemented them
-(TODO 4/1/2021). I want to do so later this month.
-
-----
-
 ## For later (with new funding)
 
 Content:

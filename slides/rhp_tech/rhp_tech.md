@@ -278,6 +278,18 @@ ware` (under `3`).
 
 ----
 
+## Shapes and functions
+
+TODO
+
+----
+
+## Provenances
+
+TODO
+
+----
+
 ## Activities
 
 (not fully implemented)
@@ -292,7 +304,7 @@ That work will not be done for the prototype.
 
 ----
 
-## Things not mapped
+## Things not (yet) mapped
 
 - Coarse ware typology
 
@@ -308,19 +320,6 @@ This somewhat complements the discussion about the database schema, since in
 part the schema will need to be updated to accommodate these. Here I want to
 present a list of content that we have not (yet) standardised, and is as such
 not in the RHPdb. 
-
-----
-
-## Not yet mapped
-
-- Ceramic shapes
-- Ceramic functions
-- Provenances/productions
-
-Note:
-
-These lists are (almost) all complete, but I have not yet implemented them
-(TODO 2/1/2021). I want to do so later this month.
 
 ---
 
