@@ -230,10 +230,15 @@ that different projects have different year ranges for similar periods.
 
 - Wares in the `wares` table.
 
+- Shapes/functions in the `shapes`/`functions` tables.
+
+- Provenance in the `provenances` table.
+
 Note:
 
-For the examples I did not display the `id_origin` (sherd ID in project databases)
-and `rhp_notes` (RHP implementation details, where applicable) columns.
+For the examples I did not display the `id_origin` (sherd ID in project databases),
+`rhp_notes` (RHP implementation details, where applicable), `id_shape`, `id_function`, 
+and `id_provenance` columns.
 
 ----
 
@@ -246,13 +251,6 @@ and `rhp_notes` (RHP implementation details, where applicable) columns.
 | --- | --- | --- | --- |
 | 15 | Hayes 181 | 100 | 300 | 
 | 393 | Dressel 1 | -130 | -10 |
-
-- There is also a `provenance` column which is currently free-form text, and
-  awaits standardisation.
-  
-Note:
-
-Provenances are being standardised, but it is not completely implemented yet. 
 
 ----
 
@@ -280,13 +278,53 @@ ware` (under `3`).
 
 ## Shapes and functions
 
-TODO
+- Ceramic shapes and uses/functions
+
+- Example records:
+
+  - Shapes:
+  
+  | id\_shape | name | id\_function |
+  | :--- | :--- | :--- |
+  | 57 | Jar | 18 |
+  | 58 | Jug | 19 |
+
+  - Functions:
+  
+  | id\_function | name | definition | id\_parent |
+  | :--- | :--- | :--- | :--- |
+  | 5 | Pottery | `<text>` | |
+  | 18 | Kitchen inventory | `<text>` | 5 |
+  | 19 | Table ware | `<text>` | 5 |
+
+Note:
+
+Shapes and functions are similar. In fact, functions are derived from shapes.
+`id_function` in the `shapes` table references to the associated function
+in the `functions` table.
+
+Functions are hierarchical. Here, we see `Kitchen inventory` and `Table ware`
+grouped under `Pottery`, through the `id_parent` column.
 
 ----
 
 ## Provenances
 
-TODO
+- Ceramic production origins
+
+- Example records:
+
+| id\_provenance | name | id\_parent |
+| :--- | :--- | :--- |
+| 4 | Italy | |
+| 17 | Central Italy | 4 |
+| 30 | Etruria | 17 |
+
+Note:
+
+Again hierarchical. Here we have the hierarchy `Italy` -> `Central Italy` -> 
+`Etruria`. This allows granular and coarse queries, depending on your research
+interest.
 
 ----
 
