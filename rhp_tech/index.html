@@ -202,8 +202,13 @@ that different projects have different year ranges for similar periods.</p>
 
 - Wares in the `wares` table.
 
-<aside class="notes"><p>For the examples I did not display the <code>id_origin</code> (sherd ID in project databases)
-and <code>rhp_notes</code> (RHP implementation details, where applicable) columns.</p>
+- Shapes/functions in the `shapes`/`functions` tables.
+
+- Provenance in the `provenances` table.
+
+<aside class="notes"><p>For the examples I did not display the <code>id_origin</code> (sherd ID in project databases),
+<code>rhp_notes</code> (RHP implementation details, where applicable), <code>id_shape</code>, <code>id_function</code>, 
+and <code>id_provenance</code> columns.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 ## Artefact types
 
@@ -214,12 +219,7 @@ and <code>rhp_notes</code> (RHP implementation details, where applicable) column
 | --- | --- | --- | --- |
 | 15 | Hayes 181 | 100 | 300 | 
 | 393 | Dressel 1 | -130 | -10 |
-
-- There is also a `provenance` column which is currently free-form text, and
-  awaits standardisation.
-  
-<aside class="notes"><p>Provenances are being standardised, but it is not completely implemented yet.</p>
-</aside></script></section><section data-markdown><script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 ## Wares
 
 - Ceramic wares
@@ -238,12 +238,47 @@ and <code>rhp_notes</code> (RHP implementation details, where applicable) column
 </aside></script></section><section data-markdown><script type="text/template">
 ## Shapes and functions
 
-TODO
-</script></section><section data-markdown><script type="text/template">
+- Ceramic shapes and uses/functions
+
+- Example records:
+
+  - Shapes:
+  
+  | id\_shape | name | id\_function |
+  | :--- | :--- | :--- |
+  | 57 | Jar | 18 |
+  | 58 | Jug | 19 |
+
+  - Functions:
+  
+  | id\_function | name | definition | id\_parent |
+  | :--- | :--- | :--- | :--- |
+  | 5 | Pottery | `<text>` | |
+  | 18 | Kitchen inventory | `<text>` | 5 |
+  | 19 | Table ware | `<text>` | 5 |
+
+<aside class="notes"><p>Shapes and functions are similar. In fact, functions are derived from shapes.
+<code>id_function</code> in the <code>shapes</code> table references to the associated function
+in the <code>functions</code> table.</p>
+<p>Functions are hierarchical. Here, we see <code>Kitchen inventory</code> and <code>Table ware</code>
+grouped under <code>Pottery</code>, through the <code>id_parent</code> column.</p>
+</aside></script></section><section data-markdown><script type="text/template">
 ## Provenances
 
-TODO
-</script></section><section data-markdown><script type="text/template">
+- Ceramic production origins
+
+- Example records:
+
+| id\_provenance | name | id\_parent |
+| :--- | :--- | :--- |
+| 4 | Italy | |
+| 17 | Central Italy | 4 |
+| 30 | Etruria | 17 |
+
+<aside class="notes"><p>Again hierarchical. Here we have the hierarchy <code>Italy</code> -&gt; <code>Central Italy</code> -&gt; 
+<code>Etruria</code>. This allows granular and coarse queries, depending on your research
+interest.</p>
+</aside></script></section><section data-markdown><script type="text/template">
 ## Activities
 
 (not fully implemented)
