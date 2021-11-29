@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>Creating syngas from carbon dioxide and hydrogen</title>
+    <title>Syngas from carbon dioxide and renewable electricity</title>
     <link rel="shortcut icon" href="./../favicon.ico"/>
     <link rel="stylesheet" href="./../dist/reveal.css" />
     <link rel="stylesheet" href="./../dist/theme/black.css" id="theme" />
@@ -15,42 +15,54 @@
     <div class="reveal">
       <div class="slides"><section  data-markdown><script type="text/template">
 
-# Creating syngas from carbon dioxide and hydrogen
+# Syngas from carbon dioxide and renewable electricity
 
 <br>
 
-Niels Wouda
+Niels A. Wouda
 
 01-12-2021
-</script></section><section ><section data-markdown><script type="text/template">
+
+<aside class="notes"><p>syngas = synthetic gas, as opposed to natural gas</p>
+</aside></script></section><section ><section data-markdown><script type="text/template">
 ## Motivation
 
-- Natural gas emits lots of carbon dioxide when burned
-- Few uses for that carbon dioxide today
+- In NL, about 45% of total energy consumption is based on natural gas [3]
+- Gas emits carbon dioxide when burned
 - Syngas has 'simple' chemistry:
-    - **Electrolysis**: water + electricity $\ce{->}$ hydrogen (+ oxygen)
-    - **Methanation**: hydrogen + carbon dioxide + electricity $\ce{->}$ syngas (+ water)
-- Carbon-neutral when carbon dioxide is captured, and clean electricity is used
-  
-> Can we combine hydrogen and carbon dioxide to make (cost-effective)
-> carbon-neutral synthetic natural gas?
-</script></section><section data-markdown><script type="text/template">
+    - **Electrolysis**: water + electricity $\longrightarrow$ hydrogen (+ oxygen)
+    - **Methanation**: hydrogen + carbon dioxide + electricity $\longrightarrow$ syngas (+ water)
+- When syngas is burned, carbon dioxide can be captured to make new syngas
+  - Completely **carbon-neutral** when renewable electricity is also used
+
+<aside class="notes"><p>I am mostly interested in the future of our energy system.
+Today&#39;s energy system used a lot of natural gas - in NL, and many other countries as well.
+It would be nice if we can provide a carbon-neutral alternative method to create such gas, so we do not have to retool half the world&#39;s energy infrastructure.
+Syngas production from captured carbon dioxide and renewable electricity is such a carbon-neutral alternative.</p>
+</aside></script></section><section data-markdown><script type="text/template">
 ## Motivation
 
 - Electrolysis, methanation and carbon capture are very expensive
-- But, so were (offshore) wind and solar not a decade ago: [1]
+- But, so were (offshore) wind and solar just a decade ago: [1]
 
 <img width="75%" src="images/irena-wind-solar.svg" />
 <!--- ![IRENA Wind and Solar PV data](images/irena-wind-solar.svg) --->
 
-Similar trend for electrolysis in past five years [2]
-</script></section><section data-markdown><script type="text/template">
+<div style="font-size: .75em;">
+    (Electrolysis has similarly gone down in cost by ~40% in past five years [2])
+</div>
+
+<aside class="notes"><p>A lot less is known about methanation and carbon capture, I am afraid.
+Those technologies are still quite new, and I could not really find reviews on their costs.
+Undoubtedly those will also show up in the coming few years.
+Based on the other figures, I am fairly confident they will also show cost reductions.</p>
+</aside></script></section><section data-markdown><script type="text/template">
 ## Motivation
 
-- Syngas is more expensive than natural gas
+- Syngas today is more expensive than natural gas
   - But how much more expensive?
-  - What drives costs? Electricity, transport, hydrogen production, something else?
-- What carbon tax would make syngas production cost-competitive with fossil fuels?
+  - What drives costs?
+- What carbon tax would make syngas production cost-competitive?
 </script></section></section><section  data-markdown><script type="text/template">
 ## Solution approach
 
@@ -61,22 +73,28 @@ Similar trend for electrolysis in past five years [2]
 - This network design problem has many **policy implications**!
 
 So, what I work on is this:
-> How to construct a minimum-cost network for syngas production?
+> How to construct a minimum-cost network for syngas production using captured carbon dioxide and renewable electricity?
 </script></section><section  data-markdown><script type="text/template">
 ## Conclusion
 
-Extensions:
-- What about the $\ce{O2}$ 'waste' product?
-</script></section><section  data-markdown><script type="text/template">
+- Syngas is great in theory, but expensive in practice
+- I want to find out what drives the cost of syngas production
+- What is needed to make syngas cost-competitive?
+
+<aside class="notes"><p>What about oxygen and/or water &#39;waste&#39; products? Recall the chemistry bit.</p>
+</aside></script></section><section  data-markdown><script type="text/template">
 ## References
 
 1. Adapted from Figure ES.3 of 
    IRENA (2021), _Renewable Power Generation Costs in 2020_, 
-   International Renewable Energy Agency, Abu Dhabi.
+   International Renewable Energy Agency.
 
 2. Glenk, G., Reichelstein, S. 
    Economics of converting renewable power to hydrogen.
    _Nature Energy_ 4, 216–222 (2019). https://doi.org/10.1038/s41560-019-0326-1
+
+3. CBS (2020), _Energiebalans; aanbod, omzetting en verbruik_, 
+   https://www.cbs.nl/nl-nl/cijfers/detail/83140NED.
 </script></section></div>
     </div>
 
@@ -120,7 +138,7 @@ Extensions:
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"math":{"TeX":{"extensions":["mhchem.js"]}},"width":1600,"height":1050,"transition":"slide","slideNumber":"c","chalkboard":{"grid":false,"theme":"whiteboard","toggleChalkboardButton":false,"toggleNotesButton":false},"menu":{"numbers":"c","markers":false,"hideMissingTitles":true}}, queryOptions);
+      var options = extend(defaultOptions, {"width":1600,"height":1050,"transition":"slide","slideNumber":"c","chalkboard":{"grid":false,"theme":"whiteboard","toggleChalkboardButton":false,"toggleNotesButton":false},"menu":{"numbers":"c","markers":false,"hideMissingTitles":true},"math":{"TeX":{"jax":["input/TeX","output/SVG"]}}}, queryOptions);
     </script>
 
     <script src="./../_assets/plugin/chalkboard/plugin.js"></script>
