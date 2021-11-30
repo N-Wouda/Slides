@@ -1,9 +1,9 @@
 ---
-title: Syngas from carbon dioxide and renewable electricity
+title: Syngas - an opportunity to reduce carbon emissions
 theme: black
 ---
 
-# Syngas from carbon dioxide and renewable electricity
+# Syngas - an opportunity to reduce carbon emissions
 
 <br>
 
@@ -13,42 +13,53 @@ Niels A. Wouda
 
 Note:
 
-syngas = synthetic gas, as opposed to natural gas
+Syngas is synthetic gas, as opposed to natural gas
+
+Most of my research deals with the _how_, not the _why_. 
+In particular, the _how_ is 'how to design a syngas production network'.
+But that is all very mathsy, so I will not go into those details today.
+Instead I am going to focus on the _why_, that is, why we want to do all that complicated math.
+
+Thus I am going to present a motivation for what I am doing, instead of talk about what I am actually doing.
+First, I want to start with a few basic facts about current energy systems.
+Then, I go into detail about future energy systems, and why syngas might be a very good idea on the way there.
 
 ---
 
 ## Motivation
 
-- In NL, about 45% of total energy consumption is based on natural gas [3]
-- Gas emits carbon dioxide when burned
+<img width="100%" src="images/cbs-energy-production.svg" alt="CBS (2021) data on Dutch energy production." />
+<!--- ![CBS (2021) data on Dutch energy production](images/cbs-energy-production.svg) --->
+
+- In NL, about 45% of total energy production is based on natural gas [3]
 - Syngas has 'simple' chemistry:
     - **Electrolysis**: water + electricity $\longrightarrow$ hydrogen (+ oxygen)
     - **Methanation**: hydrogen + carbon dioxide + electricity $\longrightarrow$ syngas (+ water)
 - When syngas is burned, carbon dioxide can be captured to make new syngas
-  - Completely **carbon-neutral** when renewable electricity is also used
-
-Note:
-
-I am mostly interested in the future of our energy system.
-Today's energy system used a lot of natural gas - in NL, and many other countries as well.
-It would be nice if we can provide a carbon-neutral alternative method to create such gas, so we do not have to retool half the world's energy infrastructure.
-Syngas production from captured carbon dioxide and renewable electricity is such a carbon-neutral alternative.
+- Syngas is **carbon-neutral** when renewable electricity is also used
 
 ----
 
 ## Motivation
 
-- Electrolysis, methanation and carbon capture are very expensive
-- But, so were (offshore) wind and solar just a decade ago: [1]
+- Methanation and carbon capture are very expensive
+- But so were (offshore) wind and solar just a decade ago: [1]
 
-<img width="75%" src="images/irena-wind-solar.svg" />
+<img width="75%" src="images/irena-wind-solar.svg" alt="IRENA (2020) data on LCoE (USD/kWh) of solar and wind." />
 <!--- ![IRENA Wind and Solar PV data](images/irena-wind-solar.svg) --->
 
 <div style="font-size: .75em;">
-    (Electrolysis has similarly gone down in cost by ~40% in past five years [2])
+    (Electrolysis cost has gone down by ~40% in the past five years [2])
 </div>
 
 Note:
+
+Solar is great in homes, but not nearly as reliable as (offshore) wind.
+First offshore wind park in Europe was built in 1995 (very small, in the Baltic).
+First Dutch one in 2007.
+First subsidy-free Dutch offshore wind park tendered in 2017 (HKZ, Vattenfall), to be commissioned by 2023.
+
+Cost-competitive renewable electricity generation is a solved problem.
 
 A lot less is known about methanation and carbon capture, I am afraid.
 Those technologies are still quite new, and I could not really find reviews on their costs.
@@ -85,22 +96,19 @@ So, what I work on is this:
 - I want to find out what drives the cost of syngas production
 - What is needed to make syngas cost-competitive?
 
-Note:
-
-What about oxygen and/or water 'waste' products? Recall the chemistry bit.
-
 ---
 
 ## References
 
 1. Adapted from Figure ES.3 of 
-   IRENA (2021), _Renewable Power Generation Costs in 2020_, 
+   IRENA (2021), 
+   _Renewable Power Generation Costs in 2020_, 
    International Renewable Energy Agency.
    https://irena.org/publications/2021/Jun/Renewable-Power-Costs-in-2020
 
-2. Glenk, G., Reichelstein, S. 
-   Economics of converting renewable power to hydrogen.
-   _Nature Energy_ 4, 216–222 (2019). https://doi.org/10.1038/s41560-019-0326-1
+2. G. Glenk and S. Reichelstein (2019), 
+   Economics of converting renewable power to hydrogen,
+   _Nature Energy_ 4, 216–222. https://doi.org/10.1038/s41560-019-0326-1
 
 3. CBS (2021), _Energiebalans; aanbod, omzetting en verbruik_, 
    https://www.cbs.nl/nl-nl/cijfers/detail/83140NED.
