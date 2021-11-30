@@ -11,19 +11,6 @@ Niels A. Wouda
 
 01-12-2021
 
-Note:
-
-Syngas is synthetic gas, as opposed to natural gas
-
-Most of my research deals with the _how_, not the _why_. 
-In particular, the _how_ is 'how to design a syngas production network'.
-But that is all very mathsy, so I will not go into those details today.
-Instead I am going to focus on the _why_, that is, why we want to do all that complicated math.
-
-Thus I am going to present a motivation for what I am doing, instead of talk about what I am actually doing.
-First, I want to start with a few basic facts about current energy systems.
-Then, I go into detail about future energy systems, and why syngas might be a very good idea on the way there.
-
 ---
 
 ## Motivation
@@ -51,20 +38,6 @@ Then, I go into detail about future energy systems, and why syngas might be a ve
 <div style="font-size: .75em;">
     (Electrolysis cost has gone down by ~40% in the past five years [2])
 </div>
-
-Note:
-
-Solar is great in homes, but not nearly as reliable as (offshore) wind.
-First offshore wind park in Europe was built in 1995 (very small, in the Baltic).
-First Dutch one in 2007.
-First subsidy-free Dutch offshore wind park tendered in 2017 (HKZ, Vattenfall), to be commissioned by 2023.
-
-Cost-competitive renewable electricity generation is a solved problem.
-
-A lot less is known about methanation and carbon capture, I am afraid.
-Those technologies are still quite new, and I could not really find reviews on their costs.
-Undoubtedly those will also show up in the coming few years.
-Based on the other figures, I am fairly confident they will also show cost reductions.
 
 ----
 
