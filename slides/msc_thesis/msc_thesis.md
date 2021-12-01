@@ -84,7 +84,6 @@ These three main questions I aim to answer in the coming few slides.
 ## Land-based electrolysers
 
 <img width="80%" src="images/onshore.svg" />
-<!--- ![Schema](images/onshore.svg) --->
 
 Note:
 
@@ -101,7 +100,6 @@ A downside is that longer, costlier electrical cables are required to connect of
 ## Offshore electrolysers
 
 <img width="80%" src="images/offshore.svg" />
-<!--- ![Schema](images/offshore.svg) --->
 
 Note:
 
@@ -196,7 +194,6 @@ or energy systems: as the levelised cost of electricity (LCoE).
 
 <div style="display: flex; justify-content: center; height: 65vh;">
 <img height="100%" src="images/example_solution.svg" style="background-color: white;"/>
-<!-- ![Example solution](images/example_solution.svg) -->
 <div style="margin-left: 20px; margin-top: auto; margin-bottom: auto;">
 
 - No platforms are re-used!
@@ -225,7 +222,6 @@ This is a lot cheaper than constructing far offshore.
 ## Deterministic solution
 
 <img width="120%" src="images/lcoh2.svg" style="background-color:white;" />
-<!--- ![Schema](images/lcoh2.svg) --->
 
 Compare:
  - Dutch electricity use is about 110TWh/y
@@ -259,9 +255,6 @@ We now turn to the stochastic model, and limiting shortfalls in production.
     <img width="48.3%" src="images/stoch_lcoh2.svg" style="background-color:white;"/>
     <img width="50%" src="images/stoch_imports.svg" style="background-color:white; margin-left: 20px;"/>
 </div>
-
-<!--- ![Schema](images/stoch_lcoh2.svg) --->
-<!--- ![Schema](images/stoch_imports.svg) --->
 
 ($\lambda$: LCoH$_2$ of a kg hydrogen shortfall)
 
@@ -297,7 +290,6 @@ This might eliminate production shortfalls altogether.
 - Robust solutions are rather cheap!
 
 <img src="images/reliability.svg" style="background-color:white;" />
-<!--- ![Schema](images/reliability.svg) --->
 
 ($\delta$: percentage overcapacity in installed capacity in electricity generation)
 
@@ -330,7 +322,6 @@ choices on the modelling result.
 ## Sensitivity analysis
 
 <img src="images/one_way_sensitivity.svg" style="background-color:white;" />
-<!--- ![Schema](images/one_way_sensitivity.svg) --->
 
 Particularly important:
 

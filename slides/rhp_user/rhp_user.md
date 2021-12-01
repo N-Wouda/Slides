@@ -55,9 +55,6 @@ for later.
      src="images/schema.svg" 
      style="transform: rotate(90deg);  margin-top: -400px;" />
 
-<!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
-<!--- ![Schema](images/schema.svg) --->
-
 Note:
 
 Same as with the technical presentation on 4/1/21.

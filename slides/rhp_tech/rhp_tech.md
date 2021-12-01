@@ -66,9 +66,6 @@ Of course, the mapping process is still very laborious.
      src="images/schema.svg" 
      style="transform: rotate(90deg);  margin-top: -400px;" />
 
-<!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
-<!--- ![Schema](images/schema.svg) --->
-
 Note:
 
 We will discuss this in detail in the next few slides, zooming in on each part

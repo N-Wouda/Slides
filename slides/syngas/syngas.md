@@ -15,8 +15,9 @@ Niels A. Wouda
 
 ## Motivation
 
-<img width="100%" src="images/cbs-energy-production.svg" alt="CBS (2021) data on Dutch energy production." />
-<!--- ![CBS (2021) data on Dutch energy production](images/cbs-energy-production.svg) --->
+<img width="100%" 
+     src="images/cbs-energy-production.svg" 
+     alt="CBS (2021) data on Dutch energy production." />
 
 - In NL, about 45% of total energy production is based on natural gas [3]
 - Pollutes carbon dioxide
@@ -32,7 +33,6 @@ Niels A. Wouda
 - Syngas is **carbon-neutral** when renewable electricity is used
 
 <img width="80%" src="images/diagram.svg" alt="Production diagram." />
-<!--- ![Production diagram](images/diagram.svg) --->
 
 ----
 
@@ -41,8 +41,9 @@ Niels A. Wouda
 - Methanation and carbon capture are very expensive
 - But so were (offshore) wind and solar just a decade ago: [1]
 
-<img width="75%" src="images/irena-wind-solar.svg" alt="IRENA (2020) data on LCoE (USD/kWh) of solar and wind." />
-<!--- ![IRENA Wind and Solar PV data](images/irena-wind-solar.svg) --->
+<img width="75%" 
+     src="images/irena-wind-solar.svg" 
+     alt="IRENA (2020) data on LCoE (USD/kWh) of solar and wind." />
 
 <div style="font-size: .75em;">
     (Electrolysis cost has gone down by ~40% in past five years [2])
