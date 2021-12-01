@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>RHP User meeting</title>
-    <link rel="shortcut icon" href="./../favicon.ico"/>
+    <link rel="shortcut icon" href="./../favicon.ico" />
     <link rel="stylesheet" href="./../dist/reveal.css" />
     <link rel="stylesheet" href="./../dist/theme/white.css" id="theme" />
     <link rel="stylesheet" href="./../css/highlight/github.css" />
+
 
   </head>
   <body>
@@ -52,12 +53,7 @@ for later.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 ## Schema
 
-<img width="85%" 
-     src="images/schema.svg" 
-     style="transform: rotate(90deg);  margin-top: -400px;" />
-
-<!--- This is a huge hack but ensures reveal-md actually copies the svg file -->
-<!--- ![Schema](images/schema.svg) --->
+<img width="85%" src="images/schema.svg" style="transform: rotate(90deg);  margin-top: -400px;" />
 
 <aside class="notes"><p>Same as with the technical presentation on 4/1/21.</p>
 </aside></script></section><section data-markdown><script type="text/template">
@@ -225,7 +221,8 @@ the time period. (maybe draw?)</p>
 <p>The first would get all inhabited sites between 200BC and 200AD.</p>
 <p>The second requires another join, like so:</p>
 <pre><code class="language-sql">JOIN rhp.certainties AS int_cert
-    ON location_interpretations.id_interpretation_certainty = int_cert.id_certainty</code></pre>
+    ON location_interpretations.id_interpretation_certainty = int_cert.id_certainty
+</code></pre>
 <p>Note the use of an ALIAS (<code>AS int_cert</code>) - the same is needed for the period join.
 This results in, for example, the following query:</p>
 <pre><code class="language-sql">SELECT DISTINCT rhp.locations.*
@@ -244,7 +241,8 @@ WHERE location_types.name = &#39;site&#39;
   AND per_cert.name IN (&#39;probable&#39;, &#39;certain&#39;)
   AND int_cert.name IN (&#39;probable&#39;, &#39;certain&#39;)
   AND periods.start_year &lt; 200
-  AND periods.end_year &gt; -200;</code></pre>
+  AND periods.end_year &gt; -200;
+</code></pre>
 <p>(returns 3,706 records)</p>
 </aside></script></section><section data-markdown><script type="text/template">
 # Artefacts (spatial)
