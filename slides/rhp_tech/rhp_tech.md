@@ -62,9 +62,7 @@ Of course, the mapping process is still very laborious.
 
 ## Schema
 
-<img width="85%" 
-     src="images/schema.svg" 
-     style="transform: rotate(90deg);  margin-top: -400px;" />
+<img width="85%" src="images/schema.svg" style="transform: rotate(90deg);  margin-top: -400px;" />
 
 Note:
 
