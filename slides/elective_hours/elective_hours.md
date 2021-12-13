@@ -15,8 +15,9 @@ Niels A. Wouda
 
 # The problem
 
-- Partially fixed schedule
-- Other part elective hours
+- Weekly schedule
+- Partially fixed
+- Other part electives
 - Learners get to decide which electives
 
 ----
@@ -31,9 +32,9 @@ Niels A. Wouda
 
 # The approach
 
-- Multiple time periods
-- In each period:
-  - Optimise schedule given belief about learner demands
+- Multiple weeks
+- Each week:
+  - Optimise schedule given beliefs about learner demands
   - Update beliefs based on learner choices
 
 ----
