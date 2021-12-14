@@ -15,7 +15,7 @@ Niels A. Wouda
 
 <!-- .slide: data-transition="none" -->
 
-## Problem setting
+## An example
 
 Elective hours:
 
@@ -30,7 +30,7 @@ Elective hours:
 
 <!-- .slide: data-transition="none" -->
 
-## Problem setting
+## An example
 
 We schedule:
 
@@ -45,7 +45,7 @@ We schedule:
 
 <!-- .slide: data-transition="none" -->
 
-## Problem setting
+## An example
 
 Learner chooses:
 
@@ -71,8 +71,8 @@ Learner chooses:
 
 - Multiple weeks
 - Each week:
-  - Optimise schedule given beliefs about learner needs
-  - Update beliefs based on learner choices
+  - Optimise schedule given estimator of learner needs
+  - Update estimator based on learner choices
 
 Note:
 
@@ -84,20 +84,43 @@ I would rather discuss learning/updating learner needs!
 
 ## Notation
 
-TODO
+Per course $c$ (e.g., Math, French, etc.):
+  - $v_{c}(x)$: value of $x \ge 0$ elective hours of course $c$
+  - Assume $v_{c}(x) \ge v_{c}(x + 1)$ for $x \ge 0$
 
 ----
 
-## Update beliefs
+## Update estimator
 
-TODO
+Recall:
+
+|   | Monday        | Tuesday         | Wednesday           |
+|---|---------------|-----------------|---------------------|
+| 1 | (fixed)       | Math~/Dutch~    | (fixed)             |
+| 2 | (fixed)       | (fixed)         | (fixed)             |
+| 3 | (fixed)       | (fixed)         | Math~/French/Dutch~ |
+| 4 | Math~/French~ | ~German/~French | (fixed)             |
+
+Maybe:
+
+- $v_{\text{Math}}(1) \ge v_{\text{French}}(1)$
+- $v_{\text{Math}}(2) \ge v_{\text{Dutch}}(1)$
+- $v_{\text{French}}(1) \ge v_{\text{German}}(1)$
+- $v_{\text{Math}}(3) \ge v_{\text{French}}(2)$ and $v_{\text{Math}}(3) \ge v_{\text{Dutch}}(1)$
+
+----
+
+## Update estimator
+
+- Goal: find $v_c(x)$ consistent with observations
+- Changing learner needs/values over time?
+- Can we observe $v_c(x)$ for many courses/hours?
+  - Exploit/explore trade-off
 
 ---
 
 # Conclusion
 
 - Personalising elective hours in secondary education:
-  - Scheduling given beliefs about learner needs 
-  - Updating beliefs based on learner choices
-- Extensions:
-  - TODO 
+  - Scheduling given estimator about learner needs 
+  - Updating estimator based on learner choices
