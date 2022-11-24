@@ -100,6 +100,113 @@ So having one bit of code for all that means we can very effectively improve a l
 
 # Dynamic solver
 
-----
+---
 
-TODO
+## High-level overview
+Our dynamic solver uses *simulations* to determine which requests to *postpone*
+
+---
+
+## Epoch instance
+<!---
+This slide shows the epoch instance, that is, all requests available at the
+start of an epoch. The requests are color-coded: red for must-dispatch requests
+and yellow for optional requests. The depot a big blue star. 
+-->
+
+---
+
+## Simulation instance
+<!---
+This slide shows the simulation instance. The simulation instance is the epoch
+instance, together with a set of sampled future requests. The sampled future
+requests have smaller node sizes and grey color, to distinguish from the
+epoch requests.
+-->
+
+---
+
+## Simulation solution
+<!--
+This slide shows the simulation solution, i.e., the solution that is obtained
+by solving the simulation instance. Each route starts and ends at the depot.
+Routes that do not contain any must-dispatch requests are colored green/grey.
+Routes that do contain must-dispatch requests are colored red.
+
+It is important to highlight in this slide that we are solving a VRPTW with
+release dates. So if an optional request is on a "green/grey" route, then it
+is in fact postponed. 
+
+It should also be mentioned that these instances are solved very fast, with
+less than 0.5 seconds time limits.
+-->
+
+--- 
+
+## Simulation instance 2
+<!--
+This slide shows the second simulation instance, different from the first one.
+It is shown to highlight the variance in possible future requests. 
+-->
+---
+
+## Simulation solution 2
+<!--
+This slide shows the solution to the second simulation instance. 
+
+We should mention here that we run about 40-50 simulations.
+-->
+
+---
+
+## Epoch instance with postpone thresholds
+<!--
+This slide shows the epoch instance, but now with labels for each epoch request
+and the corresponding postponement actions as fraction (e.g., 0.95). 
+-->
+
+---
+
+## Epoch instance with postpone thresholds and green-colored postpone nodes
+<!--
+This slide shows the same instance as previously, but now we also color all
+optional nodes green if their postponement fraction is above, say, 0.85.
+-->
+
+---
+
+## Dispatch instance
+<!--
+This slide shows the dispatch instance, which is obtained by removing the
+postponed nodes from the epoch instance. 
+
+We should mention here that our dynamic solver did pretty well with relatively
+little time. So we repeat out simulations again on this instance. 
+-->
+
+---
+
+## Final dispatch instance
+<!--
+This slide shows the final dispatch instance, which is obtained after the last
+simulation cycle. 
+-->
+
+---
+
+## Dispatch solution
+<!--
+This slide shows the dispatch solution. We highlight the routes that do not
+contain any must dispatch routes green. 
+-->
+
+---
+
+## Final dispatch solution
+<!--
+This slide shows the final dispatch solution and the final^2 dispatch instance,
+where we removed all postpone-able routes from the dispatch solution.
+
+Enfin.
+-->
+
