@@ -23,7 +23,12 @@ Jasper van Doorn, Leon Lan, Luuk Pentinga, Niels Wouda
 
 - Simplify given baseline
 - Tweak local search
-- Tuning
+
+Note:
+
+The first two are what I want to explain in more detail today.
+Since we do not have a lot of time, I will not go into what we did for diversity management, or how we tuned the many parameters of our static solver.
+That is also very interesting (and turned out to be really important, too!), so if you want to know more, we refer to both the codebase and the four-page summary paper on our methods.
 
 ----
 
@@ -50,17 +55,46 @@ The dynamic growth parameters did not seem to help much because the sizes they c
 Removing all this did not seem to hurt performance at all.
 So we more or less made everything much simpler at zero cost to performance.
 
+Having many fewer parameters was a big boon when it came to tuning.
+
 ----
 
 ## Tweak local search
 
-TODO
+<div style="display: flex;">
 
-----
+<div style="max-width: 50%; flex: 1;">
 
-## Tuning
+Baseline:
 
-TODO
+- Always at least two iterations. Later iterations tests against empty routes.
+- Probabilistically apply intensification with RELOCATE* and SWAP*.
+- Uses circle sector restriction for intensification.
+- Hard-coded operators.
+
+</div>
+
+<div style="max-width: 50%; flex: 1;">
+
+Ours:
+
+- One iteration if no improvement. Empty routes very rarely result in improvement.
+- Apply intensification only for new best individuals. 
+- Since new best individuals are fairly rare, no circle sector restriction is needed.
+- Modular operator set.
+- Templated $(N, M)$ exchange with many small performance tweaks.
+</div>
+
+</div>
+
+Note:
+
+Our operators are stored as lists of function pointers.
+We run through these and apply the operators.
+So not running an operator is as easy as not providing it to the local search in the first place.
+
+$(N, M)$ exchange covers six out of eight node-based operators.
+So having one bit of code for all that means we can very effectively improve a lot of operators at the same time.
 
 ---
 
