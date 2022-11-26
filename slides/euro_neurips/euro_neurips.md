@@ -1,6 +1,8 @@
 ---
 title: OptiML's Euro/NeurIPS VRP challenge presentation
 theme: black
+revealOptions:
+  transition: fade
 ---
 
 # Solving a static and dynamic VRP with time windows
@@ -100,23 +102,21 @@ So having one bit of code for all that means we can very effectively improve a l
 
 # Dynamic solver
 
----
+----
 
 ## High-level overview
-Our dynamic solver uses *simulations* to determine which requests to *postpone*
+Simulate future epochs to determine which requests to postpone
 
----
-
-## Epoch instance
+----
 <!---
 This slide shows the epoch instance, that is, all requests available at the
 start of an epoch. The requests are color-coded: red for must-dispatch requests
 and yellow for optional requests. The depot a big blue star. 
 -->
 
----
+<img width="80%" src="images/epoch_instance_2.jpg" />
 
-## Simulation instance
+----
 <!---
 This slide shows the simulation instance. The simulation instance is the epoch
 instance, together with a set of sampled future requests. The sampled future
@@ -124,9 +124,9 @@ requests have smaller node sizes and grey color, to distinguish from the
 epoch requests.
 -->
 
----
+<img width="80%" src="images/simulation_instance_2_0_0.jpg" />
 
-## Simulation solution
+----
 <!--
 This slide shows the simulation solution, i.e., the solution that is obtained
 by solving the simulation instance. Each route starts and ends at the depot.
@@ -141,72 +141,82 @@ It should also be mentioned that these instances are solved very fast, with
 less than 0.5 seconds time limits.
 -->
 
---- 
+<img width="80%" src="images/simulation_instance_with_solution_2_0_0.jpg" />
 
-## Simulation instance 2
+----
 <!--
-This slide shows the second simulation instance, different from the first one.
-It is shown to highlight the variance in possible future requests. 
--->
----
+This slide shows a gif, each frame showing a new simulation instance and
+its corresponding solution.
 
-## Simulation solution 2
-<!--
-This slide shows the solution to the second simulation instance. 
+We should mention here that we run about 40-50 simulations. 
 
-We should mention here that we run about 40-50 simulations.
+Note to self: Use simulation instance 4, 6, 7, 9, 11, 12
 -->
 
----
+<img width="80%" src="images/simulation_cycle_0.gif" />
 
-## Epoch instance with postpone thresholds
+----
+
 <!--
-This slide shows the epoch instance, but now with labels for each epoch request
-and the corresponding postponement actions as fraction (e.g., 0.95). 
+This slide shows the epoch instance, with labels for each optional request
+indicating its postponement frequency. 
 -->
 
----
+<img width="80%" src="images/epoch_instance_with_labels_2_0.jpg" />
 
-## Epoch instance with postpone thresholds and green-colored postpone nodes
+----
+
 <!--
-This slide shows the same instance as previously, but now we also color all
-optional nodes green if their postponement fraction is above, say, 0.85.
+This slide is the same as the previous one, but now the optional requests
+with high postponement frequency are colored green to indicate postponement. 
 -->
 
----
+<img width="80%" src="images/epoch_instance_with_labels_and_colors_2_0.jpg" />
 
-## Dispatch instance
+----
+
 <!--
-This slide shows the dispatch instance, which is obtained by removing the
-postponed nodes from the epoch instance. 
+This slide shows the next simulation cycle, where the previously postponed
+requests are colored green. Each frame shows another solved simulation instance.
 
-We should mention here that our dynamic solver did pretty well with relatively
-little time. So we repeat out simulations again on this instance. 
+Note to self: Use simulation instance 1, 2, 4, 6, 7, 8
 -->
 
----
+<img width="80%" src="images/simulation_cycle_1.gif" />
 
-## Final dispatch instance
+----
+
+<img width="80%" src="images/epoch_instance_with_labels_2_1.jpg" />
+
+----
+
+<img width="80%" src="images/epoch_instance_with_labels_and_colors_2_1.jpg" />
+
+----
+
 <!--
 This slide shows the final dispatch instance, which is obtained after the last
 simulation cycle. 
 -->
 
----
+<img width="80%" src="images/dispatch_instance_2.jpg" />
 
-## Dispatch solution
+----
+
 <!--
 This slide shows the dispatch solution. We highlight the routes that do not
 contain any must dispatch routes green. 
 -->
 
----
+<img width="80%" src="images/dispatch_instance_with_solution_2.jpg" />
 
-## Final dispatch solution
+----
+
 <!--
 This slide shows the final dispatch solution and the final^2 dispatch instance,
 where we removed all postpone-able routes from the dispatch solution.
 
 Enfin.
 -->
+<img width="80%" src="images/dispatch_instance_with_solution_plus_2.jpg" />
 
