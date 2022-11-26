@@ -67,7 +67,7 @@ So we more or less made everything much simpler at zero cost to performance.</p>
 
 Baseline:
 
-- Always at least two iterations. Later iterations tests against empty routes.
+- Always at least two iterations. Later iterations test against empty routes.
 - Probabilistically apply intensification with RELOCATE* and SWAP*.
 - Uses circle sector restriction for intensification.
 - Hard-coded operators.
@@ -102,28 +102,25 @@ Idea:
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/epoch_instance_2.svg" />
 
-<aside class="notes"><p>This slide shows the epoch instance, that is, all requests available at the
-start of an epoch. The requests are color-coded: red for must-dispatch requests
-and yellow for optional requests. The depot a big blue star.</p>
+<aside class="notes"><p>Every epoch, we have a set of &#39;must-dispatch&#39; and &#39;optionally dispatch&#39; requests.
+Some optional requests we want to dispatch along with the must-dispatch requests, since that might result in fairly efficient routes.</p>
+<p>Here you see an example epoch with one &#39;must-dispatch&#39; request, and ten optional requests.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/simulation_instance_2_0_0.svg" />
 
-<aside class="notes"><p>This slide shows the simulation instance. The simulation instance is the epoch
-instance, together with a set of sampled future requests. The sampled future
-requests have smaller node sizes and grey color, to distinguish from the
-epoch requests.</p>
+<aside class="notes"><p>Our dynamic solution simulates ahead, drawing samples for future epochs.
+This slide shows the simulation instance.
+The simulation instance is the epoch instance, together with a set of sampled future requests. 
+The sampled future requests have smaller node sizes and grey color, to distinguish from the epoch requests.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/simulation_instance_with_solution_2_0_0.svg" />
 
-<aside class="notes"><p>This slide shows the simulation solution, i.e., the solution that is obtained
-by solving the simulation instance. Each route starts and ends at the depot.
-Routes that do not contain any must-dispatch requests are colored green/grey.
-Routes that do contain must-dispatch requests are colored red.</p>
-<p>It is important to highlight in this slide that we are solving a VRPTW with
-release dates. So if an optional request is on a &quot;green/grey&quot; route, then it
-is in fact postponed.</p>
-<p>It should also be mentioned that these instances are solved very fast, with
-less than 0.5 seconds time limits.</p>
+<aside class="notes"><p>We solve each simulated instance very quickly, in less than half a second.
+This slide shows the simulation solution, i.e., the solution that is obtained by solving the simulation instance.
+Routes that do not contain the must-dispatch request are coloured grey.
+The route that contains the must-dispatch request is colored red.</p>
+<p>Of course, this is just one simulation.
+We do this many more times.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <!-- <img src="images/cycle0/simulation_instance_with_solution_2_0_4.svg" /> -->
 <!-- <img src="images/cycle0/simulation_instance_with_solution_2_0_6.svg" /> -->
@@ -140,19 +137,21 @@ less than 0.5 seconds time limits.</p>
   </image>
 </svg>
 
-<aside class="notes"><p>This slide shows a gif, each frame showing a new simulation instance and
-its corresponding solution.</p>
-<p>We should mention here that we run about 40-50 simulations.</p>
+<aside class="notes"><p>We solve on average 40-50 simulation instances.
+On this slide, you can see a few of the solutions: observe that the must-dispatch request shares routes with a number of different optional requests.
+This gives us distributional information on how often optional requests are part of &#39;must-dispatch routes&#39;, that is, how often those optional requests are paired with must-dispatch requests.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/epoch_instance_with_labels_2_0.svg" />
 
-<aside class="notes"><p>This slide shows the epoch instance, with labels for each optional request
-indicating its postponement frequency.</p>
+<aside class="notes"><p>We use that distributional information to decide which optional requests to postpone to later epochs.
+This works in a very simple way: if an optional request is not dispatched often with a must-dispatch request, we postpone it.
+We use a simple threshold to determine this, in this case 80% for postponement.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/epoch_instance_with_labels_and_colors_2_0.svg" />
 
-<aside class="notes"><p>This slide is the same as the previous one, but now the optional requests
-with high postponement frequency are colored green to indicate postponement.</p>
+<aside class="notes"><p>This slide is the same as the previous one, but now the optional requests are marked.
+What we noticed doing this is that often we did not postpone enough requests for later epochs.
+We solve that by applying another cycle of simulations, where we use release dates to prevent the postponed request from being paired with the must-dispatch request.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <!-- <img src="images/cycle1/simulation_instance_with_solution_2_1_1.svg" /> -->
 <!-- <img src="images/cycle1/simulation_instance_with_solution_2_1_2.svg" /> -->
@@ -169,30 +168,37 @@ with high postponement frequency are colored green to indicate postponement.</p>
   </image>
 </svg>
 
-<aside class="notes"><p>This slide shows the next simulation cycle, where the previously postponed
-requests are colored green. Each frame shows another solved simulation instance.</p>
+<aside class="notes"><p>This slide shows another cycle of simulations.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/epoch_instance_with_labels_and_colors_2_1.svg" />
-</script></section><section data-markdown><script type="text/template">
+
+<aside class="notes"><p>After the cycle of simulations we postpone another optional request.</p>
+</aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/dispatch_instance_2.svg" />
 
-<aside class="notes"><p>This slide shows the final dispatch instance, which is obtained after the last
-simulation cycle.</p>
+<aside class="notes"><p>After parameter tuning, we decided on doing three such simulation cycles.
+This slide shows the final dispatch instance, which is obtained after the last simulation cycle.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/dispatch_instance_with_solution_2.svg" />
 
-<aside class="notes"><p>This slide shows the dispatch solution. We highlight the routes that do not
-contain any must dispatch routes green.</p>
+<aside class="notes"><p>When we have obtained the requests we dispatch in the current epoch, we again call the static solver.
+This slide shows the obtained dispatch solution.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/dispatch_instance_with_solution_plus_2.svg" />
 
-<aside class="notes"><p>This slide shows the final dispatch solution and the final dispatch instance,
-where we removed all postpone-able routes from the dispatch solution.</p>
+<aside class="notes"><p>With the dispatch solution in hand, we apply one last trick: we filter away any route that does not contain a must-dispatch request.
+Such routes only contain optional requests, and those requests could, for example, be paired with new requests in later epochs.</p>
+<p>What you see on this slide is the solution we return to the environment.</p>
+<p>And that is more or less it!</p>
 </aside></script></section></section><section  data-markdown><script type="text/template">
 # Questions?
 
 n.a.wouda@rug.nl
-</script></section></div>
+
+https://github.com/N-Wouda/Euro-NeurIPS-2022
+
+<aside class="notes"><p>We do not have any time for questions right now, but please feel free to e-mail me, or open an issue in our GitHub repository.</p>
+</aside></script></section></div>
     </div>
 
     <script src="./../dist/reveal.js"></script>
