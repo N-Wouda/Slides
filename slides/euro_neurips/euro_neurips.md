@@ -66,7 +66,7 @@ Having many fewer parameters was a big boon when it came to tuning.
 
 Baseline:
 
-- Always at least two iterations. Later iterations tests against empty routes.
+- Always at least two iterations. Later iterations test against empty routes.
 - Probabilistically apply intensification with RELOCATE* and SWAP*.
 - Uses circle sector restriction for intensification.
 - Hard-coded operators.
@@ -112,9 +112,10 @@ This is easiest to explain via an example, which we will go through in the next 
 
 Note:
 
-This slide shows the epoch instance, that is, all requests available at the
-start of an epoch. The requests are color-coded: red for must-dispatch requests
-and yellow for optional requests. The depot a big blue star.
+Every epoch, we have a set of 'must-dispatch' and 'optionally dispatch' requests.
+Some optional requests we want to dispatch along with the must-dispatch requests, since that might result in fairly efficient routes.
+
+Here you see an example epoch with one 'must-dispatch' request, and ten optional requests.
 
 ----
 
@@ -122,10 +123,10 @@ and yellow for optional requests. The depot a big blue star.
 
 Note:
 
-This slide shows the simulation instance. The simulation instance is the epoch
-instance, together with a set of sampled future requests. The sampled future
-requests have smaller node sizes and grey color, to distinguish from the
-epoch requests.
+Our dynamic solution simulates ahead, drawing samples for future epochs.
+This slide shows the simulation instance.
+The simulation instance is the epoch instance, together with a set of sampled future requests. 
+The sampled future requests have smaller node sizes and grey color, to distinguish from the epoch requests.
 
 ----
 
@@ -133,17 +134,13 @@ epoch requests.
 
 Note:
 
-This slide shows the simulation solution, i.e., the solution that is obtained
-by solving the simulation instance. Each route starts and ends at the depot.
-Routes that do not contain any must-dispatch requests are colored green/grey.
-Routes that do contain must-dispatch requests are colored red.
+We solve each simulated instance very quickly, in less than half a second.
+This slide shows the simulation solution, i.e., the solution that is obtained by solving the simulation instance.
+Routes that do not contain the must-dispatch request are coloured grey.
+The route that contains the must-dispatch request is colored red.
 
-It is important to highlight in this slide that we are solving a VRPTW with
-release dates. So if an optional request is on a "green/grey" route, then it
-is in fact postponed.
-
-It should also be mentioned that these instances are solved very fast, with
-less than 0.5 seconds time limits.
+Of course, this is just one simulation.
+We do this many more times.
 
 ----
 
@@ -164,10 +161,9 @@ less than 0.5 seconds time limits.
 
 Note:
 
-This slide shows a gif, each frame showing a new simulation instance and
-its corresponding solution.
-
-We should mention here that we run about 40-50 simulations.
+We solve on average 40-50 simulation instances.
+On this slide, you can see a few of the solutions: observe that the must-dispatch request shares routes with a number of different optional requests.
+This gives us distributional information on how often optional requests are part of 'must-dispatch routes', that is, how often those optional requests are paired with must-dispatch requests.
 
 ----
 
@@ -175,8 +171,9 @@ We should mention here that we run about 40-50 simulations.
 
 Note:
 
-This slide shows the epoch instance, with labels for each optional request
-indicating its postponement frequency.
+We use that distributional information to decide which optional requests to postpone to later epochs.
+This works in a very simple way: if an optional request is not dispatched often with a must-dispatch request, we postpone it.
+We use a simple threshold to determine this, in this case 80% for postponement.
 
 ----
 
@@ -184,8 +181,9 @@ indicating its postponement frequency.
 
 Note:
 
-This slide is the same as the previous one, but now the optional requests
-with high postponement frequency are colored green to indicate postponement.
+This slide is the same as the previous one, but now the optional requests are marked.
+What we noticed doing this is that often we did not postpone enough requests for later epochs.
+We solve that by applying another cycle of simulations, where we use release dates to prevent the postponed request from being paired with the must-dispatch request.
 
 ----
 
@@ -206,12 +204,15 @@ with high postponement frequency are colored green to indicate postponement.
 
 Note:
 
-This slide shows the next simulation cycle, where the previously postponed
-requests are colored green. Each frame shows another solved simulation instance.
+This slide shows another cycle of simulations.
 
 ----
 
 <img width="80%" src="images/epoch_instance_with_labels_and_colors_2_1.svg" />
+
+Note:
+
+After the cycle of simulations we postpone another optional request.
 
 ----
 
@@ -219,8 +220,8 @@ requests are colored green. Each frame shows another solved simulation instance.
 
 Note:
 
-This slide shows the final dispatch instance, which is obtained after the last
-simulation cycle.
+After parameter tuning, we decided on doing three such simulation cycles.
+This slide shows the final dispatch instance, which is obtained after the last simulation cycle.
 
 ----
 
@@ -228,8 +229,8 @@ simulation cycle.
 
 Note:
 
-This slide shows the dispatch solution. We highlight the routes that do not
-contain any must dispatch routes green.
+When we have obtained the requests we dispatch in the current epoch, we again call the static solver.
+This slide shows the obtained dispatch solution. 
 
 ----
 
@@ -237,11 +238,21 @@ contain any must dispatch routes green.
 
 Note:
 
-This slide shows the final dispatch solution and the final dispatch instance,
-where we removed all postpone-able routes from the dispatch solution.
+With the dispatch solution in hand, we apply one last trick: we filter away any route that does not contain a must-dispatch request.
+Such routes only contain optional requests, and those requests could, for example, be paired with new requests in later epochs.
+
+What you see on this slide is the solution we return to the environment.
+
+And that is more or less it!
 
 ---
 
 # Questions?
 
 n.a.wouda@rug.nl
+
+https://github.com/N-Wouda/Euro-NeurIPS-2022
+
+Note:
+
+We do not have any time for questions right now, but please feel free to e-mail me, or open an issue in our GitHub repository.
