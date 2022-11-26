@@ -147,6 +147,13 @@ less than 0.5 seconds time limits.
 
 ----
 
+<!-- <img src="images/cycle0/simulation_instance_with_solution_2_0_4.svg" /> -->
+<!-- <img src="images/cycle0/simulation_instance_with_solution_2_0_6.svg" /> -->
+<!-- <img src="images/cycle0/simulation_instance_with_solution_2_0_7.svg" /> -->
+<!-- <img src="images/cycle0/simulation_instance_with_solution_2_0_9.svg" /> -->
+<!-- <img src="images/cycle0/simulation_instance_with_solution_2_0_11.svg" /> -->
+<!-- <img src="images/cycle0/simulation_instance_with_solution_2_0_12.svg" /> -->
+
 <svg width="80%" height="100%" viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <image width="100%" height="100%" xlink:href="images/cycle0/simulation_instance_with_solution_2_0_4.jpg">
     <animate attributeName="xlink:href" 
@@ -181,6 +188,13 @@ This slide is the same as the previous one, but now the optional requests
 with high postponement frequency are colored green to indicate postponement.
 
 ----
+
+<!-- <img src="images/cycle1/simulation_instance_with_solution_2_1_1.svg" /> -->
+<!-- <img src="images/cycle1/simulation_instance_with_solution_2_1_2.svg" /> -->
+<!-- <img src="images/cycle1/simulation_instance_with_solution_2_1_4.svg" /> -->
+<!-- <img src="images/cycle1/simulation_instance_with_solution_2_1_6.svg" /> -->
+<!-- <img src="images/cycle1/simulation_instance_with_solution_2_1_7.svg" /> -->
+<!-- <img src="images/cycle1/simulation_instance_with_solution_2_1_8.svg" /> -->
 
 <svg width="80%" height="100%" viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <image width="100%" height="100%" xlink:href="images/cycle1/simulation_instance_with_solution_2_1_1.jpg">
