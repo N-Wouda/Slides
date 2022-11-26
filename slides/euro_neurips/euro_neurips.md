@@ -247,12 +247,13 @@ And that is more or less it!
 
 ---
 
-# Questions?
+# Thank you
 
-n.a.wouda@rug.nl
+Questions? n.a.wouda@rug.nl
 
-https://github.com/N-Wouda/Euro-NeurIPS-2022
+Code: https://github.com/N-Wouda/Euro-NeurIPS-2022
 
 Note:
 
-We do not have any time for questions right now, but please feel free to e-mail me, or open an issue in our GitHub repository.
+We do not have any time for questions right now, but please feel free to e-mail me.
+The code is available in the linked repository.
