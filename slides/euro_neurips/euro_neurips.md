@@ -1,8 +1,6 @@
 ---
 title: OptiML's Euro/NeurIPS VRP challenge presentation
 theme: black
-revealOptions:
-  transition: fade
 ---
 
 # Solving a static and dynamic VRP with time windows
@@ -19,12 +17,11 @@ Jasper van Doorn, Leon Lan, Luuk Pentinga, Niels Wouda
 
 # Static solver
 
-----
-
-## High-level overview
+High-level overview:
 
 - Simplify given baseline
 - Tweak local search
+- (and more that we do not have time for)
 
 Note:
 
@@ -102,32 +99,40 @@ So having one bit of code for all that means we can very effectively improve a l
 
 # Dynamic solver
 
+Idea:
+> Simulate ahead to determine which requests to postpone
+
+Note:
+
+This is easiest to explain via an example, which we will go through in the next few slides.
+
 ----
 
-## High-level overview
-Simulate future epochs to determine which requests to postpone
+<img width="80%" src="images/epoch_instance_2.svg" />
 
-----
-<!---
+Note:
+
 This slide shows the epoch instance, that is, all requests available at the
 start of an epoch. The requests are color-coded: red for must-dispatch requests
-and yellow for optional requests. The depot a big blue star. 
--->
-
-<img width="80%" src="images/epoch_instance_2.jpg" />
+and yellow for optional requests. The depot a big blue star.
 
 ----
-<!---
+
+<img width="80%" src="images/simulation_instance_2_0_0.svg" />
+
+Note:
+
 This slide shows the simulation instance. The simulation instance is the epoch
 instance, together with a set of sampled future requests. The sampled future
 requests have smaller node sizes and grey color, to distinguish from the
 epoch requests.
--->
-
-<img width="80%" src="images/simulation_instance_2_0_0.jpg" />
 
 ----
-<!--
+
+<img width="80%" src="images/simulation_instance_with_solution_2_0_0.svg" />
+
+Note:
+
 This slide shows the simulation solution, i.e., the solution that is obtained
 by solving the simulation instance. Each route starts and ends at the depot.
 Routes that do not contain any must-dispatch requests are colored green/grey.
@@ -135,88 +140,94 @@ Routes that do contain must-dispatch requests are colored red.
 
 It is important to highlight in this slide that we are solving a VRPTW with
 release dates. So if an optional request is on a "green/grey" route, then it
-is in fact postponed. 
+is in fact postponed.
 
 It should also be mentioned that these instances are solved very fast, with
 less than 0.5 seconds time limits.
--->
-
-<img width="80%" src="images/simulation_instance_with_solution_2_0_0.jpg" />
 
 ----
-<!--
+
+<svg width="80%" height="100%" viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <image width="100%" height="100%" xlink:href="images/cycle0/simulation_instance_with_solution_2_0_4.jpg">
+    <animate attributeName="xlink:href" 
+      values="images/cycle0/simulation_instance_with_solution_2_0_4.svg;images/cycle0/simulation_instance_with_solution_2_0_6.svg;images/cycle0/simulation_instance_with_solution_2_0_7.svg;images/cycle0/simulation_instance_with_solution_2_0_9.svg;images/cycle0/simulation_instance_with_solution_2_0_11.svg;images/cycle0/simulation_instance_with_solution_2_0_12.svg;" 
+      begin="0s" repeatCount="indefinite" dur="6s"/>
+  </image>
+</svg>
+
+Note:
+
 This slide shows a gif, each frame showing a new simulation instance and
 its corresponding solution.
 
-We should mention here that we run about 40-50 simulations. 
-
-Note to self: Use simulation instance 4, 6, 7, 9, 11, 12
--->
-
-<img width="80%" src="images/simulation_cycle_0.gif" />
+We should mention here that we run about 40-50 simulations.
 
 ----
 
-<!--
+<img width="80%" src="images/epoch_instance_with_labels_2_0.svg" />
+
+Note:
+
 This slide shows the epoch instance, with labels for each optional request
-indicating its postponement frequency. 
--->
-
-<img width="80%" src="images/epoch_instance_with_labels_2_0.jpg" />
+indicating its postponement frequency.
 
 ----
 
-<!--
+<img width="80%" src="images/epoch_instance_with_labels_and_colors_2_0.svg" />
+
+Note:
+
 This slide is the same as the previous one, but now the optional requests
-with high postponement frequency are colored green to indicate postponement. 
--->
-
-<img width="80%" src="images/epoch_instance_with_labels_and_colors_2_0.jpg" />
+with high postponement frequency are colored green to indicate postponement.
 
 ----
 
-<!--
+<svg width="80%" height="100%" viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <image width="100%" height="100%" xlink:href="images/cycle1/simulation_instance_with_solution_2_1_1.jpg">
+    <animate attributeName="xlink:href" 
+      values="images/cycle1/simulation_instance_with_solution_2_1_1.svg;images/cycle1/simulation_instance_with_solution_2_1_2.svg;images/cycle1/simulation_instance_with_solution_2_1_4.svg;images/cycle1/simulation_instance_with_solution_2_1_6.svg;images/cycle1/simulation_instance_with_solution_2_1_7.svg;images/cycle1/simulation_instance_with_solution_2_1_8.svg;" 
+      begin="0s" repeatCount="indefinite" dur="6s"/>
+  </image>
+</svg>
+
+Note:
+
 This slide shows the next simulation cycle, where the previously postponed
 requests are colored green. Each frame shows another solved simulation instance.
 
-Note to self: Use simulation instance 1, 2, 4, 6, 7, 8
--->
+----
 
-<img width="80%" src="images/simulation_cycle_1.gif" />
+<img width="80%" src="images/epoch_instance_with_labels_and_colors_2_1.svg" />
 
 ----
 
-<img width="80%" src="images/epoch_instance_with_labels_2_1.jpg" />
+<img width="80%" src="images/dispatch_instance_2.svg" />
 
-----
+Note:
 
-<img width="80%" src="images/epoch_instance_with_labels_and_colors_2_1.jpg" />
-
-----
-
-<!--
 This slide shows the final dispatch instance, which is obtained after the last
-simulation cycle. 
--->
-
-<img width="80%" src="images/dispatch_instance_2.jpg" />
+simulation cycle.
 
 ----
 
-<!--
+<img width="80%" src="images/dispatch_instance_with_solution_2.svg" />
+
+Note:
+
 This slide shows the dispatch solution. We highlight the routes that do not
-contain any must dispatch routes green. 
--->
-
-<img width="80%" src="images/dispatch_instance_with_solution_2.jpg" />
+contain any must dispatch routes green.
 
 ----
 
-<!--
-This slide shows the final dispatch solution and the final^2 dispatch instance,
+<img width="80%" src="images/dispatch_instance_with_solution_plus_2.svg" />
+
+Note:
+
+This slide shows the final dispatch solution and the final dispatch instance,
 where we removed all postpone-able routes from the dispatch solution.
 
-Enfin.
--->
-<img width="80%" src="images/dispatch_instance_with_solution_plus_2.jpg" />
+---
 
+# Questions?
+
+n.a.wouda@rug.nl
