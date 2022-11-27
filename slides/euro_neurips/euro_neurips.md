@@ -60,6 +60,75 @@ Having many fewer parameters was a big boon when it came to tuning.
 
 ## Tweak local search
 
+<!-- .slide: data-transition="none" -->
+
+<div style="display: flex;">
+
+<div style="max-width: 50%; flex: 1;">
+
+Baseline:
+
+- <b>Always at least two iterations. Later iterations test against empty routes.</b>
+
+</div>
+
+<div style="max-width: 50%; flex: 1;">
+
+Ours:
+
+- <b>One iteration if no improvement. Empty routes rarely result in improvement.</b>
+</div>
+
+</div>
+
+Note:
+
+The baseline local search loop performs at least two iterations.
+We found that this was very rarely useful if the first iteration does not yet result in an improvement.
+So we removed the two iterations requirement, and do multiple iterations only if there has been an improvement.
+
+----
+
+## Tweak local search
+
+<!-- .slide: data-transition="none" -->
+
+<div style="display: flex;">
+
+<div style="max-width: 50%; flex: 1;">
+
+Baseline:
+
+- Always at least two iterations. Later iterations test against empty routes.
+- <b>Probabilistically apply intensification with RELOCATE* and SWAP*.</b>
+- <b>Uses circle sector restriction for intensification.</b>
+
+</div>
+
+<div style="max-width: 50%; flex: 1;">
+
+Ours:
+
+- One iteration if no improvement. Empty routes rarely result in improvement.
+- <b>Apply intensification only for new best individuals.</b>
+- <b>Since new best individuals are rare, no circle sector restriction is needed.</b>
+</div>
+
+</div>
+
+Note:
+
+We moved intensification with route operators out of the regular local search loop.
+It is a separate function now, that is only called when we find a new best individual.
+
+As a consequence, we no longer needed the circle sector restriction.
+
+----
+
+## Tweak local search
+
+<!-- .slide: data-transition="none" -->
+
 <div style="display: flex;">
 
 <div style="max-width: 50%; flex: 1;">
@@ -69,7 +138,7 @@ Baseline:
 - Always at least two iterations. Later iterations test against empty routes.
 - Probabilistically apply intensification with RELOCATE* and SWAP*.
 - Uses circle sector restriction for intensification.
-- Hard-coded operators.
+- <b>Hard-coded operators.</b>
 
 </div>
 
@@ -77,11 +146,11 @@ Baseline:
 
 Ours:
 
-- One iteration if no improvement. Empty routes very rarely result in improvement.
-- Apply intensification only for new best individuals. 
-- Since new best individuals are fairly rare, no circle sector restriction is needed.
-- Modular operator set.
-- Templated $(N, M)$ exchange with many small performance tweaks.
+- One iteration if no improvement. Empty routes rarely result in improvement.
+- Apply intensification only for new best individuals.
+- Since new best individuals are rare, no circle sector restriction is needed.
+- <b>Modular operator set.</b>
+- <b>Templated $(N, M)$ exchange with many small performance tweaks.</b>
 </div>
 
 </div>
@@ -175,15 +244,17 @@ We use that distributional information to decide which optional requests to post
 This works in a very simple way: if an optional request is not dispatched often with a must-dispatch request, we postpone it.
 We use a simple threshold to determine this, in this case 80% for postponement.
 
+In the competition we used different thresholds for different epochs.
+
 ----
 
 <img width="80%" src="images/epoch_instance_with_labels_and_colors_2_0.svg" />
 
 Note:
 
-This slide is the same as the previous one, but now the optional requests are marked.
+This slide is the same as the previous one, but now the postponed optional requests are marked.
 What we noticed doing this is that often we did not postpone enough requests for later epochs.
-We solve that by applying another cycle of simulations, where we use release dates to prevent the postponed request from being paired with the must-dispatch request.
+We solve that by applying another cycle of simulations, where we use release dates to prevent the postponed requests from being paired with the must-dispatch request.
 
 ----
 
@@ -205,6 +276,7 @@ We solve that by applying another cycle of simulations, where we use release dat
 Note:
 
 This slide shows another cycle of simulations.
+In the competition we performed three such cycles.
 
 ----
 
