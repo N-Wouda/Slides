@@ -241,8 +241,8 @@ This gives us distributional information on how often optional requests are part
 Note:
 
 We use that distributional information to decide which optional requests to postpone to later epochs.
-This works in a very simple way: if an optional request is not dispatched often with a must-dispatch request, we postpone it.
-We use a simple threshold to determine this, in this case 80% for postponement.
+This works in a very simple way: we count how often an optional request was in a route with simulated requests.
+If that happened more often than some threshold (in this example, 80%), we postpone the request.
 
 In the competition we used different thresholds for different epochs.
 
@@ -278,6 +278,8 @@ Note:
 This slide shows another cycle of simulations.
 In the competition we performed three such cycles.
 
+Observe that the must-dispatch request is never paired with the newly postponed requests.
+
 ----
 
 <img width="80%" src="images/epoch_instance_with_labels_and_colors_2_1.svg" />
@@ -292,7 +294,6 @@ After the cycle of simulations we postpone another optional request.
 
 Note:
 
-After parameter tuning, we decided on doing three such simulation cycles.
 This slide shows the final dispatch instance, which is obtained after the last simulation cycle.
 
 ----
