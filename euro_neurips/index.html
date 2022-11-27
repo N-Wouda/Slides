@@ -204,8 +204,8 @@ This gives us distributional information on how often optional requests are part
 <img width="80%" src="images/epoch_instance_with_labels_2_0.svg" />
 
 <aside class="notes"><p>We use that distributional information to decide which optional requests to postpone to later epochs.
-This works in a very simple way: if an optional request is not dispatched often with a must-dispatch request, we postpone it.
-We use a simple threshold to determine this, in this case 80% for postponement.</p>
+This works in a very simple way: we count how often an optional request was in a route with simulated requests.
+If that happened more often than some threshold (in this example, 80%), we postpone the request.</p>
 <p>In the competition we used different thresholds for different epochs.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/epoch_instance_with_labels_and_colors_2_0.svg" />
@@ -231,6 +231,7 @@ We solve that by applying another cycle of simulations, where we use release dat
 
 <aside class="notes"><p>This slide shows another cycle of simulations.
 In the competition we performed three such cycles.</p>
+<p>Observe that the must-dispatch request is never paired with the newly postponed requests.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/epoch_instance_with_labels_and_colors_2_1.svg" />
 
@@ -238,8 +239,7 @@ In the competition we performed three such cycles.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/dispatch_instance_2.svg" />
 
-<aside class="notes"><p>After parameter tuning, we decided on doing three such simulation cycles.
-This slide shows the final dispatch instance, which is obtained after the last simulation cycle.</p>
+<aside class="notes"><p>This slide shows the final dispatch instance, which is obtained after the last simulation cycle.</p>
 </aside></script></section><section data-markdown><script type="text/template">
 <img width="80%" src="images/dispatch_instance_with_solution_2.svg" />
 
