@@ -217,14 +217,6 @@ After the cycle of simulations we postpone another optional request.
 
 ----
 
-<img width="80%" src="images/dispatch_instance_2.svg" />
-
-Note:
-
-This slide shows the final dispatch instance, which is obtained after the last simulation cycle.
-
-----
-
 <img width="80%" src="images/dispatch_instance_with_solution_2.svg" />
 
 Note:
