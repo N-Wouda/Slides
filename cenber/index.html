@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Designing an e-fuel supply chain</title>
+    <link rel="shortcut icon" href="./../favicon.ico" />
+    <link rel="stylesheet" href="./../dist/reveal.css" />
+    <link rel="stylesheet" href="./../dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="./../css/highlight/github.css" />
+
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+# Designing an e-fuel supply chain
+
+<br>
+
+Niels Wouda, Ward Romeijnders, Evrim Ursavas
+
+08-03-2023
+</script></section><section ><section data-markdown><script type="text/template">
+## Motivation
+
+<div style="display: flex; align-items: center;">
+
+<div style="max-width: 50%; flex: 1;">
+
+- Fossil fuel consumption emits lots of CO$_2$
+- Not everything can switch to electricity:
+  - Shipping
+  - Aviation
+  - Chemical/heavy industry
+- Remains a need for **low-carbon** variants of kerosene, methanol
+- These can be made from:
+  - Biomass
+  - Electricity (e-fuels)
+
+</div>
+
+<div style="max-width: 50%; flex: 1;">
+
+<img width="90%" src="images/methanol_uses.png" alt="Methanol uses." />
+
+<img width="90%" src="images/saf_uses.png" alt="SAF uses." />
+
+</div>
+
+<aside class="notes"><p>Biomass is iffy, and probably not enough to cover entire industry.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Motivation
+
+- E-fuels have 'simple' chemistry:
+    - **Electrolysis**: water + electricity $\longrightarrow$ hydrogen
+    - **Carbon capture**: exhaust fumes + electricity $\longrightarrow$ carbon dioxide
+    - **Hydrogenation**: hydrogen + carbon dioxide $\longrightarrow$ e-fuel
+- **Low-carbon** when renewable electricity is used
+
+<img width="80%" src="images/diagram.svg" alt="Production diagram." />
+
+<aside class="notes"><p>&quot;Low-carbon&quot;, not necessarily carbon-neutral, because it really depends on where you get your carbon from.
+But it&#39;s basically a win either way.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+## Motivation
+
+- Making e-fuels is expensive
+- In a big part due to renewable electricity costs
+- But those are not as high anymore as they used to be
+
+<img width="75%"  src="images/irena-wind-solar.svg" alt="IRENA (2020) data on LCoE (USD/kWh) of solar and wind." />
+
+<small>
+
+Adapted from Figure ES.3 of IRENA (2021), _Renewable Power Generation Costs in 2020_, International Renewable Energy Agency. https://irena.org/publications/2021/Jun/Renewable-Power-Costs-in-2020
+
+</small>
+</script></section></section><section  data-markdown><script type="text/template">
+## Supply chain
+
+- How do we build a (cost-)efficient e-fuel supply chain?
+  - And how do we deal with uncertain demand, electricity supply?
+  - System perspective, not individual companies/operators.
+- Big optimisation problem with many uncertain parameters
+- Goal: build a supply chain that's not too expensive, but can meet demand in sufficiently many cases (service level guarantee).
+
+<img width="60%" src="images/supply_chain.png" alt="Supply chain diagram." />
+</script></section><section ><section data-markdown><script type="text/template">
+## Methodology
+
+Large optimisation problem:
+
+- Minimise cost of construction decisions
+
+- Many decisions need to be integral (hard!)
+
+- Constructed supply chain needs to meet service level guarantee (hard!)
+
+- Doing everything at the same time takes _a lot of time_ to find an optimal solution
+
+**THIS IS HARD**
+</script></section><section data-markdown><script type="text/template">
+## Methodology
+
+- Instead, start small: just guess an optimal solution.
+
+- Then test if that guess meets the service level guarantee:
+
+  - If yes: done.
+
+  - If no: we learn something about how to improve our decisions!
+
+- Optimise again with what we learned.
+
+- Continue until done.
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Case studies
+
+We are currently investigating two settings:
+
+- Sustainable aviation fuel (SAF) production in several EU countries.
+- Methanol production in the Netherlands.
+
+<aside class="notes"><p>The first, SAF part is based on the master thesis of a former student.
+The second, methanol part is part of my paper.
+Since the master thesis is good <em>and</em> mostly done, I will spend most of my time on that.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+### SAF production
+
+- SAF from captured CO$_2$ via formic acid (FA) production
+- Uncertain SAF demand in 2030; electricity from grid
+- Two configurations:
+
+<img width="100%" src="images/scenario_1.png" alt="Scenario #1." />
+<img width="100%" src="images/scenario_2.png" alt="Scenario #2." />
+</script></section><section data-markdown><script type="text/template">
+### Results
+
+<img width="60%" src="images/cluster.png" alt="NW cluster." />
+
+<aside class="notes"><p>2030 ambitions for SAF are not <em>that</em> big, about 5% of current kerosene consumption.
+That means you basically need to find one or two big emitters and refineries, and you can satisfy all local SAF demand.
+As a consequence, you get a very scattered/separated supply chain.
+Everything is very local, particularly in the UK where there are a lot of refineries.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+
+### Results
+
+<img width="60%" src="images/mjsp_between_scenarios.png" alt="MJSP." />
+
+<aside class="notes"><p>This figure presents the minimum jet fuel selling price, that is, the minimum price you&#39;d need to charge for the SAF not to go bankrupt.
+Making SAF via direct air capture is more expensive, but not even that much more expensive.
+One limitation is that the transport costs are not modeled in detail, and likely bigger than presented here.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+### Results
+
+<img width="60%" src="images/sensitivity_analysis.png" alt="Sensitivity analysis." />
+
+Conversion efficiency matters *a lot*
+</script></section><section data-markdown><script type="text/template">
+### Methanol production
+
+- Methanol from captured CO$_2$ and hydrogen
+- Using renewable electricity from offshore wind: uncertainty in demand and supply.
+- Offshore energy islands?
+
+<aside class="notes"><p>There&#39;s some debate about these energy islands, and they might be a good idea.
+We want to investigate that a bit further.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+### Results
+
+<div style="display: flex; align-items: center;">
+
+<div style="max-width: 50%; flex: 1;">
+
+- Energy islands make a lot of sense because transporting electricity offshore is really expensive.
+- Separate wind parks: less dependency on wind.
+- Cluster e-fuel near existing industry, in coastal regions.
+
+</div>
+
+<div style="max-width: 50%; flex: 1;">
+
+<img width="60%" src="images/methanol.png" alt="Methanol supply chain." />
+
+</div>
+
+<aside class="notes"><p>I want to present some conclusions based on a representative solution.
+No numbers here because I haven&#39;t 100% checked yet that it all makes sense :-).</p>
+<p>Energy islands are particularly cost-effective when connecting wind parks relatively far offshore. 
+Those wind parks are typically constructed when larger energy demands need to be met. 
+In most of the scenarios we have so far solved, we observe that our model prefers a number of smaller energy islands, rather than a single central hub. </p>
+<p>Second, the solution of Figure 1 shows that our model prefers to build wind parks relatively far apart, and connect these wind parks to multiple facilities, resulting in an overall rather connected network. 
+These two properties follow from the stochasticity in wind speeds: our model aims to minimise spatial dependencies due to exposure to the same wind, which improves the resilience of the resulting network, and thus the service level that can be guaranteed. 
+The ability to exploit this stochastic information is another clear argument in favour of modelling approaches that take supply uncertainty into account explicitly.</p>
+<p>Third, the solution of Figure 1 shows that it is cost-effective to cluster carbon capture and e-fuel installations in coastal regions, near existing industry.
+In particular, the industrial areas around IJmuiden, the port of Rotterdam, and Vlissingen appear prime candidates for e-fuel production plants. 
+Together, these three plants could produce over five megatons of methanol annually, at a cost a few times higher than current (fossil-based) market prices.</p>
+</aside></script></section></section><section  data-markdown><script type="text/template">
+## Conclusion
+
+- E-fuels are not that far from cost-competitive if done 'all at once', from a system perspective.
+- But policy and regulation would help, particularly when we want to get individual operators to agree to work together on this.
+</script></section></div>
+    </div>
+
+    <script src="./../dist/reveal.js"></script>
+
+    <script src="./../plugin/markdown/markdown.js"></script>
+    <script src="./../plugin/highlight/highlight.js"></script>
+    <script src="./../plugin/zoom/zoom.js"></script>
+    <script src="./../plugin/notes/notes.js"></script>
+    <script src="./../plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":1600,"height":1050,"transition":"slide","slideNumber":"c","chalkboard":{"grid":false,"theme":"whiteboard","toggleChalkboardButton":false,"toggleNotesButton":false},"menu":{"numbers":"c","markers":false,"hideMissingTitles":true},"math":{"TeX":{"jax":["input/TeX","output/SVG"]}}}, queryOptions);
+    </script>
+
+    <script src="./../_assets/plugin/chalkboard/plugin.js"></script>
+    <script src="./../_assets/plugin/menu/menu.js"></script>
+    <script src="./../_assets/plugin/plugin.js"></script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
